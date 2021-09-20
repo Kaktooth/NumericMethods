@@ -29,44 +29,44 @@ namespace NumberMethods
             //}
             Math.Round(x, 4);
             string replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
-            double result = 0;
-            try
-            {
-                result = sc.Eval(replacedExpression);
-            }
-            catch (Exception ex)
-            {
-                //double sin = 0;
-                //double num = 0;
+            double result = sc.Eval(replacedExpression);
+            //try
+            //{
 
-                //for (int i = 0; i < expression.Length; i++)
-                //{
-                //    bool func = false;
+            //}
+            //catch (Exception ex)
+            //{
+            //double sin = 0;
+            //double num = 0;
 
-                //    if(expression[i] == 's')
-                //    {
-                //        func = true;
-                //    }
-                //    if(expression[i] == '^'&&func == true)
-                //    {
-                //         num = Convert.ToDouble(expression.Split('^')[1].Split(')')[0]);
-                //    }
+            //for (int i = 0; i < expression.Length; i++)
+            //{
+            //    bool func = false;
 
-                //}
-                //if (num != 0)
-                //{
-                //     sin = Math.Sin(Math.Pow(num, 3));
-                //}
-                //else
-                //{
-                //    sin = Math.Sin(num);
-                //}
-                //string s = expression.Split('s')[1].Split(')')[0];
-                //replacedExpression = expression.Replace(s, sin.ToString().Replace(',', '.'));
-                //result = sc.Eval(replacedExpression);
-                result = 0;
+            //    if(expression[i] == 's')
+            //    {
+            //        func = true;
+            //    }
+            //    if(expression[i] == '^'&&func == true)
+            //    {
+            //         num = Convert.ToDouble(expression.Split('^')[1].Split(')')[0]);
+            //    }
 
-            }
+            //}
+            //if (num != 0)
+            //{
+            //     sin = Math.Sin(Math.Pow(num, 3));
+            //}
+            //else
+            //{
+            //    sin = Math.Sin(num);
+            //}
+            //string s = expression.Split('s')[1].Split(')')[0];
+            //replacedExpression = expression.Replace(s, sin.ToString().Replace(',', '.'));
+            //result = sc.Eval(replacedExpression);
+            //    result = 0;
+
+            //}
 
             return result;
         }
@@ -75,7 +75,7 @@ namespace NumberMethods
             double result;
 
             double dx = 10e-10;
-            result = (CalculateF(fx + dx) - CalculateF(fx)) / dx;
+            result = ((CalculateF(fx) + dx) - CalculateF(fx)) / dx;
 
             return result;
 
@@ -85,8 +85,13 @@ namespace NumberMethods
             double result;
 
             double dx = Math.Pow(10, -5);
-            result = Math.Abs((2 / Math.Pow(dx, 2)) * ((CalculateF(fx + dx)
-                + CalculateF(fx - dx)) / 2 - CalculateF(fx)));
+            bool r =false;
+            if (CalculateF(fx) == 0)
+            {
+                r = true;
+            }
+                result = Math.Abs((2 / Math.Pow(dx, 2)) * (( CalculateF(fx + dx)
+                + CalculateF(fx-dx)) / 2 - CalculateF(fx)));
             if (sign == -1)
             {
                 return -result;
@@ -176,15 +181,20 @@ namespace NumberMethods
             list.Add(fx);
             double y = fa + ((x - a) / (x - a)) * (fx - fa);
             list.Add(y);
-
+            values.Add(counter, list);
             double xi = 0;
 
             xi = a - fa * (x - a) / (fx - fa);
-            values.Add(counter, list);
+           
             double fnext = CalculateF(xi);
             if (Math.Abs(fnext) < e)
             {
-                stepText += $"Answer: x = {xi}, f(x) = {fnext}\r\n";
+                list.Add(xi);
+                list.Add(fnext);
+                y = fa + ((x - a) / (x - a)) * (fx - fa);
+                list.Add(y);
+                values.Add(counter+1, list);
+                stepText += $"Answer: x = {xi}, f(x) = {Math.Round(fnext,4)}\r\n";
                 return;
             }
             Iteration2(counter, a, xi, e, values);

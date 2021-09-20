@@ -76,10 +76,12 @@ namespace NumberMethods
 
             var interval = Math.Round(Math.Abs((a - b) / n), 1);
             MessageBox.Show(interval.ToString());
-            for (double i = a; i < b + 0.01; i += interval)
+            for (double i = a; i < b + 0.01; i += Math.Round(interval,1))
             {
+            
                 var fx = Equation.CalculateF(i);
                 var der = Equation.CalculateSecondDerivative(i, Math.Sign(fx));
+                          //Equation.CalculateDerivative(Equation.CalculateDerivative(i));
                 row = dt.NewRow();
                 row["x"] = Math.Round(i, 1);
                 row["f(x)"] = fx;
@@ -112,18 +114,18 @@ namespace NumberMethods
                     }
                     Dictionary<int, List<double>> values = new Dictionary<int, List<double>>();
                     IterationData iterationData = new IterationData();
-                    var list = new List<double>();
-                    double fa = (double)dt.Rows[i - 1].ItemArray[1];
-                    double fb = (double)dt.Rows[i].ItemArray[1];
+                    //var list = new List<double>();
+                    //double fa = (double)dt.Rows[i - 1].ItemArray[1];
+                    //double fb = (double)dt.Rows[i].ItemArray[1];
                     
-                    double y = fa + ((x0 - a) / (b - a)) * (fb - fa);
-                    double x1 = a - ((fa * (x0 - a) / (x0f - fa)));
+                    //double y = fa + ((x0 - a) / (b - a)) * (fb - fa);
+                    //double x1 = a - ((fa * (x0 - a) / (x0f - fa)));
                     //double x1 = a - (fa / (fb - fa)) * (b - a);
-                    list.Add(x0);
-                    list.Add(x0f);
-                    list.Add(y);
+                    //list.Add(x0);
+                    //list.Add(x0f);
+                    //list.Add(y);
                     int counter = 0;
-                    values.Add(counter, list);
+                    //values.Add(counter, list);
                     
                    
                     var thread = new Thread(
@@ -133,7 +135,7 @@ namespace NumberMethods
                     thread.Start();
                     thread.Join();
 
-                    for (int j = 0; j < values.Count; j++)
+                    for (int j = 1; j < values.Count; j++)
                     {
 
                         iterationData.row = iterationData.dt.NewRow();
@@ -167,6 +169,11 @@ namespace NumberMethods
         {
             listBox1.Items.Clear();
             GC.Collect();
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
 
         }
     }

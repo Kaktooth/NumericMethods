@@ -49,9 +49,9 @@ namespace NumberMethods
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(25, 983);
+            this.button1.Location = new System.Drawing.Point(25, 441);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(268, 65);
+            this.button1.Size = new System.Drawing.Size(276, 65);
             this.button1.TabIndex = 1;
             this.button1.Text = "Calculate";
             this.button1.UseVisualStyleBackColor = true;
@@ -76,11 +76,12 @@ namespace NumberMethods
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 126);
+            this.label2.Location = new System.Drawing.Point(25, 124);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(428, 25);
             this.label2.TabIndex = 5;
             this.label2.Text = "Interval (Enter two numbers seperated by coma -2,8)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // textBox2
             // 
@@ -125,38 +126,38 @@ namespace NumberMethods
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(794, 22);
+            this.dataGridView1.Location = new System.Drawing.Point(451, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(562, 1188);
+            this.dataGridView1.Size = new System.Drawing.Size(547, 954);
             this.dataGridView1.TabIndex = 14;
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 25;
-            this.listBox1.Location = new System.Drawing.Point(2408, 22);
+            this.listBox1.Location = new System.Drawing.Point(1549, 12);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(567, 1379);
+            this.listBox1.Size = new System.Drawing.Size(282, 1054);
             this.listBox1.TabIndex = 15;
             this.listBox1.SelectedValueChanged += new System.EventHandler(this.listBox1_SelectedValueChanged);
             // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(1563, 22);
+            this.dataGridView2.Location = new System.Drawing.Point(1004, 12);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 62;
             this.dataGridView2.RowTemplate.Height = 33;
-            this.dataGridView2.Size = new System.Drawing.Size(808, 1188);
+            this.dataGridView2.Size = new System.Drawing.Size(517, 954);
             this.dataGridView2.TabIndex = 16;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(2546, 1478);
+            this.button2.Location = new System.Drawing.Point(1549, 1083);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(270, 64);
+            this.button2.Size = new System.Drawing.Size(282, 47);
             this.button2.TabIndex = 17;
             this.button2.Text = "Clear Calculations";
             this.button2.UseVisualStyleBackColor = true;
@@ -164,9 +165,9 @@ namespace NumberMethods
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1563, 1229);
+            this.richTextBox1.Location = new System.Drawing.Point(451, 1005);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(808, 334);
+            this.richTextBox1.Size = new System.Drawing.Size(1070, 137);
             this.richTextBox1.TabIndex = 19;
             this.richTextBox1.Text = "";
             // 
@@ -174,7 +175,7 @@ namespace NumberMethods
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2987, 1600);
+            this.ClientSize = new System.Drawing.Size(1884, 1142);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView2);

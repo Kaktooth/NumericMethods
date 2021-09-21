@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace NumberMethods
 {
@@ -27,9 +28,17 @@ namespace NumberMethods
             //{
             //    x = Math.Round(x, 4);
             //}
-            Math.Round(x, 4);
-            string replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
-            double result = sc.Eval(replacedExpression);
+            double result = 0;
+            try
+            {
+                Math.Round(x, 4);
+                string replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
+                result = sc.Eval(replacedExpression);
+            }
+            catch(System.Runtime.InteropServices.COMException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             //try
             //{
 

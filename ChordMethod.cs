@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -90,6 +91,28 @@ namespace NumberMethods
             }
             listBox1.Items.Add(dt);
             dataGridView1.DataSource = dt;
+            PictureBox p = new PictureBox();
+            p.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            using (Graphics g = Graphics.FromImage(p.Image))
+            {
+
+
+                Pen pen = new Pen(Color.Black, 3);
+                Pen pen2 = new Pen(Color.Black, 1);
+                List<PointF> pointslist = new List<PointF>();
+
+
+                for (float j = (float)a; j < (float)b; j += 0.01f)
+                {
+                    pointslist.Add(new PointF(j * 30 + (pictureBox1.Width / 2), -(float)Equation.CalculateF(j) * 30 + (pictureBox1.Height / 2)));
+                }
+                //(float)values[j + 1][1] * 30 +
+                g.DrawLine(pen2, new Point(0, -pictureBox1.Height), new Point(0, pictureBox1.Height));
+                g.DrawLine(pen2, new Point(pictureBox1.Width, (pictureBox1.Height / 2)), new Point(-pictureBox1.Width, (pictureBox1.Height / 2)));
+                pointslist.Reverse();
+                g.DrawLines(pen, pointslist.ToArray());
+                p.Refresh();
+            }
             for (int i = 1; i < dt.Rows.Count; i++)
             {
                 //f(a)*f(b)<0
@@ -134,7 +157,7 @@ namespace NumberMethods
                     });
                     thread.Start();
                     thread.Join();
-
+                   
                     for (int j = 1; j < values.Count; j++)
                     {
 
@@ -144,10 +167,14 @@ namespace NumberMethods
                         iterationData.row["f(x)"] = values[j][1];
                         iterationData.row["y"] = values[j][2];
                         iterationData.dt.Rows.Add(iterationData.row);
+                        
                     }
                     listBox1.Items.Add(iterationData.dt);
+                    listBox1.Items.Add(p);
                     listBox1.Items.Add(Equation.stepText);
                     Equation.ClearSteps();
+
+
 
                 }
 
@@ -158,8 +185,16 @@ namespace NumberMethods
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            dataGridView2.DataSource = listBox1.SelectedItem;
-            if (listBox1.SelectedItem is string)
+            if (listBox1.SelectedItem is DataTable)
+            {
+                dataGridView2.DataSource = listBox1.SelectedItem;
+            }
+            else if (listBox1.SelectedItem is PictureBox)
+            {
+                pictureBox1.Image = ((PictureBox)listBox1.SelectedItem).Image;
+                pictureBox1.Refresh();
+            }
+            else if (listBox1.SelectedItem is string)
             {
                 richTextBox1.Text = (string)listBox1.SelectedItem;
             }

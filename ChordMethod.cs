@@ -91,28 +91,9 @@ namespace NumberMethods
             }
             listBox1.Items.Add(dt);
             dataGridView1.DataSource = dt;
+
             PictureBox p = new PictureBox();
-            p.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            using (Graphics g = Graphics.FromImage(p.Image))
-            {
-
-
-                Pen pen = new Pen(Color.Black, 3);
-                Pen pen2 = new Pen(Color.Black, 1);
-                List<PointF> pointslist = new List<PointF>();
-
-
-                for (float j = (float)a; j < (float)b; j += 0.01f)
-                {
-                    pointslist.Add(new PointF(j * 30 + (pictureBox1.Width / 2), -(float)Equation.CalculateF(j) * 30 + (pictureBox1.Height / 2)));
-                }
-                //(float)values[j + 1][1] * 30 +
-                g.DrawLine(pen2, new Point(0, -pictureBox1.Height), new Point(0, pictureBox1.Height));
-                g.DrawLine(pen2, new Point(pictureBox1.Width, (pictureBox1.Height / 2)), new Point(-pictureBox1.Width, (pictureBox1.Height / 2)));
-                pointslist.Reverse();
-                g.DrawLines(pen, pointslist.ToArray());
-                p.Refresh();
-            }
+            p = Equation.DrawPlot(p, pictureBox1.Width, pictureBox1.Height, (float)a, (float)b,50,90);
             for (int i = 1; i < dt.Rows.Count; i++)
             {
                 //f(a)*f(b)<0
@@ -182,7 +163,7 @@ namespace NumberMethods
 
 
         }
-
+        
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem is DataTable)
@@ -209,6 +190,29 @@ namespace NumberMethods
 
         private void label2_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void PlotButton_Click(object sender, EventArgs e)
+        {
+            
+            Graphic g = new Graphic();
+            g.textBox1.Text = ((float)Convert.ToDouble(textBox2.Text.Split(',')[0])).ToString();
+            g.textBox2.Text = ((float)Convert.ToDouble(textBox2.Text.Split(',')[1])).ToString();
+            g.ShowDialog();
+        }
+
+        private void TableButton_Click(object sender, EventArgs e)
+        {
+            Data d = new Data();
+            foreach (var item in listBox1.Items)
+            {
+                if (!(item is PictureBox))
+                {
+                    d.listBox1.Items.Add(item);
+                }
+            }
+            d.ShowDialog();
 
         }
     }

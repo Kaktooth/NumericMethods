@@ -45,6 +45,8 @@ namespace NumberMethods
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.TableButton = new System.Windows.Forms.Button();
+            this.PlotButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -183,11 +185,31 @@ namespace NumberMethods
             this.pictureBox1.TabIndex = 20;
             this.pictureBox1.TabStop = false;
             // 
+            // TableButton
+            // 
+            this.TableButton.Location = new System.Drawing.Point(1516, 3);
+            this.TableButton.Name = "TableButton";
+            this.TableButton.Size = new System.Drawing.Size(27, 29);
+            this.TableButton.TabIndex = 21;
+            this.TableButton.UseVisualStyleBackColor = true;
+            this.TableButton.Click += new System.EventHandler(this.TableButton_Click);
+            // 
+            // PlotButton
+            // 
+            this.PlotButton.Location = new System.Drawing.Point(1516, 477);
+            this.PlotButton.Name = "PlotButton";
+            this.PlotButton.Size = new System.Drawing.Size(27, 29);
+            this.PlotButton.TabIndex = 22;
+            this.PlotButton.UseVisualStyleBackColor = true;
+            this.PlotButton.Click += new System.EventHandler(this.PlotButton_Click);
+            // 
             // ChordMethod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1884, 1142);
+            this.Controls.Add(this.PlotButton);
+            this.Controls.Add(this.TableButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
@@ -230,5 +252,7 @@ namespace NumberMethods
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button TableButton;
+        private System.Windows.Forms.Button PlotButton;
     }
 }

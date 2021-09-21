@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace NumberMethods
@@ -173,6 +174,32 @@ namespace NumberMethods
                 }
                 Iteration(counter, new_x, a, b, e, values);
             }
+        }
+        public static PictureBox DrawPlot(PictureBox p,int width,int height,float a,float b,int scaleX,int scaleY)
+        {
+            
+            p.Image = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(p.Image))
+            {
+
+
+                Pen pen = new Pen(Color.Black, 3);
+                Pen pen2 = new Pen(Color.Black, 1);
+                List<PointF> pointslist = new List<PointF>();
+
+
+                for (float j = (float)a; j < (float)b; j += 0.005f)
+                {
+                    pointslist.Add(new PointF(j * scaleX + (width / 2), -(float)Equation.CalculateF(j) * scaleY + (height / 2)));
+                }
+                //(float)values[j + 1][1] * 30 +
+                g.DrawLine(pen2, new Point(0, -height), new Point(0, height));
+                g.DrawLine(pen2, new Point(width, (height / 2)), new Point(-width, (height / 2)));
+                pointslist.Reverse();
+                g.DrawLines(pen, pointslist.ToArray());
+                p.Refresh();
+            }
+            return p;
         }
         //catch (Exception ex)
         //{

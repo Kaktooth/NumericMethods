@@ -17,8 +17,11 @@ namespace NumberMethods
             column.ColumnName = "n";
             column.ReadOnly = false;
             column.Unique = false;
+            column.Caption = "n";
+            
 
             dt.Columns.Add(column);
+            dt.Columns[0].SetOrdinal(0);
 
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.Double");
@@ -48,8 +51,8 @@ namespace NumberMethods
 
             dt.Columns.Add(column);
 
-            //DataColumn[] PrimaryKeyColumns = new DataColumn[1];
-            //PrimaryKeyColumns[0] = dt.Columns["x"];
+            //DataColumn[] PrimaryKeyColumns = new DataColumn[0];
+            //PrimaryKeyColumns[0] = dt.Columns["n"];
             //dt.PrimaryKey = PrimaryKeyColumns;
 
             dataSet = new DataSet();

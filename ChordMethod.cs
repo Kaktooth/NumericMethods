@@ -94,44 +94,45 @@ namespace NumberMethods
 
             PictureBox p = new PictureBox();
             p = Equation.DrawPlot(p, pictureBox1.Width, pictureBox1.Height, (float)a, (float)b,50,90);
+            listBox1.Items.Add(p);
             for (int i = 1; i < dt.Rows.Count; i++)
             {
                 //f(a)*f(b)<0
                 if ((double)dt.Rows[i - 1].ItemArray[1] * (double)dt.Rows[i].ItemArray[1] < 0)
                 {
                     listBox1.Items.Add($"[{(double)dt.Rows[i - 1].ItemArray[0]},{(double)dt.Rows[i].ItemArray[0]}] have root");
-                    double x0 = 0;
-                    double x0f = 0;
+                    //double x0 = 0;
+                    //double x0f = 0;
                     //if f(a)*f''(a)>0 { x0 = b } else(f(b)*f''(b)>0) { x0 = a}
 
-                    if ((double)dt.Rows[i - 1].ItemArray[1] * (double)dt.Rows[i - 1].ItemArray[2] > 0)
-                    {
-                        x0 = (double)dt.Rows[i].ItemArray[0];
-                        x0f = (double)dt.Rows[i].ItemArray[1];
-                        listBox1.Items.Add($"f(a)*f''(a) > 0, so x0 = {x0}( {x0f} )");
-                    }
-                    else if ((double)dt.Rows[i].ItemArray[1] * (double)dt.Rows[i].ItemArray[2] > 0)
-                    {
-                        x0 = (double)dt.Rows[i-1].ItemArray[0];
-                        x0f = (double)dt.Rows[i-1].ItemArray[1];
-                        listBox1.Items.Add($"f(b) * f''(b) > 0, so x0 = {x0}( {x0f} )");
-                    }
+                    //if ((double)dt.Rows[i - 1].ItemArray[1] * (double)dt.Rows[i - 1].ItemArray[2] > 0)
+                    //{
+                    //    x0 = (double)dt.Rows[i].ItemArray[0];
+                    //    x0f = (double)dt.Rows[i].ItemArray[1];
+                    //    listBox1.Items.Add($"f(a)*f''(a) > 0, so x0 = {x0}( {x0f} )");
+                    //}
+                    //else if ((double)dt.Rows[i].ItemArray[1] * (double)dt.Rows[i].ItemArray[2] > 0)
+                    //{
+                    //    x0 = (double)dt.Rows[i-1].ItemArray[0];
+                    //    x0f = (double)dt.Rows[i-1].ItemArray[1];
+                    //    listBox1.Items.Add($"f(b) * f''(b) > 0, so x0 = {x0}( {x0f} )");
+                    //}
                     Dictionary<int, List<double>> values = new Dictionary<int, List<double>>();
                     IterationData iterationData = new IterationData();
                     //var list = new List<double>();
                     //double fa = (double)dt.Rows[i - 1].ItemArray[1];
                     //double fb = (double)dt.Rows[i].ItemArray[1];
-                    
+
                     //double y = fa + ((x0 - a) / (b - a)) * (fb - fa);
                     //double x1 = a - ((fa * (x0 - a) / (x0f - fa)));
                     //double x1 = a - (fa / (fb - fa)) * (b - a);
                     //list.Add(x0);
                     //list.Add(x0f);
                     //list.Add(y);
-                    int counter = 0;
+
                     //values.Add(counter, list);
-                    
-                   
+
+                    int counter = 0;
                     var thread = new Thread(
                     () => {
                       Equation.Iteration2(counter, (double)dt.Rows[i-1].ItemArray[0], (double)dt.Rows[i].ItemArray[0], E, values);
@@ -146,15 +147,15 @@ namespace NumberMethods
                         iterationData.row["n"] = j;
                         iterationData.row["x"] = values[j][0];
                         iterationData.row["f(x)"] = values[j][1];
-                        iterationData.row["y"] = values[j][2];
+                        //iterationData.row["y"] = values[j][2];
                         iterationData.dt.Rows.Add(iterationData.row);
                         
                     }
                     listBox1.Items.Add(iterationData.dt);
-                    listBox1.Items.Add(p);
+                    
                     listBox1.Items.Add(Equation.stepText);
                     Equation.ClearSteps();
-
+                    GC.Collect();
 
 
                 }

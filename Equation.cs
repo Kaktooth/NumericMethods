@@ -29,17 +29,20 @@ namespace NumberMethods
             //{
             //    x = Math.Round(x, 4);
             //}
-            double result = 0;
-            try
-            {
+            
+            //try
+            //{
+           
                 Math.Round(x, 4);
-                string replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
-                result = sc.Eval(replacedExpression);
-            }
-            catch(System.Runtime.InteropServices.COMException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+                var replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
+                return sc.Eval(replacedExpression);
+                
+            //}
+            //catch(System.Runtime.InteropServices.COMException ex)
+            //{
+                //MessageBox.Show(ex.Message);
+            //}
+            //return 0;
             //try
             //{
 
@@ -78,7 +81,7 @@ namespace NumberMethods
 
             //}
 
-            return result;
+            
         }
         public static double CalculateDerivative(double fx)
         {
@@ -208,27 +211,26 @@ namespace NumberMethods
         //}
         public static void Iteration2(int counter, double a, double x, double e, Dictionary<int, List<double>> values)
         {
-           
+            
             counter++;
             double fa = CalculateF(a);
             double fx = CalculateF(x);
             var list = new List<double>();
             list.Add(x);
             list.Add(fx);
-            double y = fa + ((x - a) / (x - a)) * (fx - fa);
-            list.Add(y);
+            //double y = fa + ((x - a) / (x - a)) * (fx - fa);
+            //list.Add(y);
             values.Add(counter, list);
             double xi = 0;
-
             xi = a - fa * (x - a) / (fx - fa);
-           
             double fnext = CalculateF(xi);
             if (Math.Abs(fnext) < e)
             {
+                
                 list.Add(xi);
                 list.Add(fnext);
-                y = fa + ((x - a) / (x - a)) * (fx - fa);
-                list.Add(y);
+                //y = fa + ((x - a) / (x - a)) * (fx - fa);
+                //list.Add(y);
                 values.Add(counter+1, list);
                 stepText += $"Answer: x = {xi}, f(x) = {Math.Round(fnext,4)}\r\n";
                 return;

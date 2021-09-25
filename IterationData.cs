@@ -18,7 +18,7 @@ namespace NumberMethods
             column.ReadOnly = false;
             column.Unique = false;
             column.Caption = "n";
-            
+
 
             dt.Columns.Add(column);
             dt.Columns[0].SetOrdinal(0);

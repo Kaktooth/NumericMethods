@@ -29,18 +29,18 @@ namespace NumberMethods
             //{
             //    x = Math.Round(x, 4);
             //}
-            
+
             //try
             //{
-           
-                Math.Round(x, 4);
-                var replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
-                return sc.Eval(replacedExpression);
-                
+
+            Math.Round(x, 4);
+            var replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
+            return sc.Eval(replacedExpression);
+
             //}
             //catch(System.Runtime.InteropServices.COMException ex)
             //{
-                //MessageBox.Show(ex.Message);
+            //MessageBox.Show(ex.Message);
             //}
             //return 0;
             //try
@@ -81,7 +81,7 @@ namespace NumberMethods
 
             //}
 
-            
+
         }
         public static double CalculateDerivative(double fx)
         {
@@ -98,13 +98,13 @@ namespace NumberMethods
             double result;
 
             double dx = Math.Pow(10, -5);
-            bool r =false;
+            bool r = false;
             if (CalculateF(fx) == 0)
             {
                 r = true;
             }
-                result = Math.Abs((2 / Math.Pow(dx, 2)) * (( CalculateF(fx + dx)
-                + CalculateF(fx-dx)) / 2 - CalculateF(fx)));
+            result = Math.Abs((2 / Math.Pow(dx, 2)) * ((CalculateF(fx + dx)
+            + CalculateF(fx - dx)) / 2 - CalculateF(fx)));
             if (sign == -1)
             {
                 return -result;
@@ -178,9 +178,9 @@ namespace NumberMethods
                 Iteration(counter, new_x, a, b, e, values);
             }
         }
-        public static PictureBox DrawPlot(PictureBox p,int width,int height,float a,float b,int scaleX,int scaleY)
+        public static PictureBox DrawPlot(PictureBox p, int width, int height, float a, float b, int scaleX, int scaleY)
         {
-            
+
             p.Image = new Bitmap(width, height);
             using (Graphics g = Graphics.FromImage(p.Image))
             {
@@ -211,7 +211,7 @@ namespace NumberMethods
         //}
         public static void Iteration2(int counter, double a, double x, double e, Dictionary<int, List<double>> values)
         {
-            
+
             counter++;
             double fa = CalculateF(a);
             double fx = CalculateF(x);
@@ -226,13 +226,13 @@ namespace NumberMethods
             double fnext = CalculateF(xi);
             if (Math.Abs(fnext) < e)
             {
-                
+
                 list.Add(xi);
                 list.Add(fnext);
                 //y = fa + ((x - a) / (x - a)) * (fx - fa);
                 //list.Add(y);
-                values.Add(counter+1, list);
-                stepText += $"Answer: x = {xi}, f(x) = {Math.Round(fnext,4)}\r\n";
+                values.Add(counter + 1, list);
+                stepText += $"Answer: x = {xi}, f(x) = {Math.Round(fnext, 4)}\r\n";
                 return;
             }
             Iteration2(counter, a, xi, e, values);

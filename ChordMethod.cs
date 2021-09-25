@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -77,12 +76,11 @@ namespace NumberMethods
 
             var interval = Math.Round(Math.Abs((a - b) / n), 1);
             MessageBox.Show(interval.ToString());
-            for (double i = a; i < b + 0.01; i += Math.Round(interval,1))
+            for (double i = a; i < b + 0.01; i += Math.Round(interval, 1))
             {
-            
+
                 var fx = Equation.CalculateF(i);
-                var der = Equation.CalculateSecondDerivative(i, Math.Sign(fx));
-                          //Equation.CalculateDerivative(Equation.CalculateDerivative(i));
+                //var der = Equation.CalculateSecondDerivative(i, Math.Sign(fx));
                 row = dt.NewRow();
                 row["x"] = Math.Round(i, 1);
                 row["f(x)"] = fx;
@@ -93,7 +91,7 @@ namespace NumberMethods
             dataGridView1.DataSource = dt;
 
             PictureBox p = new PictureBox();
-            p = Equation.DrawPlot(p, pictureBox1.Width, pictureBox1.Height, (float)a, (float)b,50,90);
+            p = Equation.DrawPlot(p, pictureBox1.Width, pictureBox1.Height, (float)a, (float)b, 50, 90);
             listBox1.Items.Add(p);
             for (int i = 1; i < dt.Rows.Count; i++)
             {
@@ -134,12 +132,13 @@ namespace NumberMethods
 
                     int counter = 0;
                     var thread = new Thread(
-                    () => {
-                      Equation.Iteration2(counter, (double)dt.Rows[i-1].ItemArray[0], (double)dt.Rows[i].ItemArray[0], E, values);
+                    () =>
+                    {
+                        Equation.Iteration2(counter, (double)dt.Rows[i - 1].ItemArray[0], (double)dt.Rows[i].ItemArray[0], E, values);
                     });
                     thread.Start();
                     thread.Join();
-                   
+
                     for (int j = 1; j < values.Count; j++)
                     {
 
@@ -149,10 +148,10 @@ namespace NumberMethods
                         iterationData.row["f(x)"] = values[j][1];
                         //iterationData.row["y"] = values[j][2];
                         iterationData.dt.Rows.Add(iterationData.row);
-                        
+
                     }
                     listBox1.Items.Add(iterationData.dt);
-                    
+
                     listBox1.Items.Add(Equation.stepText);
                     Equation.ClearSteps();
                     GC.Collect();
@@ -164,7 +163,7 @@ namespace NumberMethods
 
 
         }
-        
+
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedItem is DataTable)
@@ -196,7 +195,7 @@ namespace NumberMethods
 
         private void PlotButton_Click(object sender, EventArgs e)
         {
-            
+
             Graphic g = new Graphic();
             g.textBox1.Text = ((float)Convert.ToDouble(textBox2.Text.Split(',')[0])).ToString();
             g.textBox2.Text = ((float)Convert.ToDouble(textBox2.Text.Split(',')[1])).ToString();

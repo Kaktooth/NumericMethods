@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NumberMethods
@@ -24,7 +18,7 @@ namespace NumberMethods
             {
                 dataGridView1.DataSource = listBox1.SelectedItem;
             }
-            
+
         }
     }
 }

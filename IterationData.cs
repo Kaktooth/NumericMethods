@@ -41,15 +41,15 @@ namespace NumberMethods
 
             dt.Columns.Add(column);
 
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Double");
-            column.ColumnName = "y";
-            column.AutoIncrement = false;
-            column.Caption = "y";
-            column.ReadOnly = false;
-            column.Unique = false;
+            //column = new DataColumn();
+            //column.DataType = System.Type.GetType("System.Double");
+            //column.ColumnName = "y";
+            //column.AutoIncrement = false;
+            //column.Caption = "y";
+            //column.ReadOnly = false;
+            //column.Unique = false;
 
-            dt.Columns.Add(column);
+            //dt.Columns.Add(column);
 
             //DataColumn[] PrimaryKeyColumns = new DataColumn[0];
             //PrimaryKeyColumns[0] = dt.Columns["n"];

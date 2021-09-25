@@ -58,15 +58,15 @@ namespace NumberMethods
 
             dt.Columns.Add(column);
 
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Double");
-            column.ColumnName = "f''(x)";
-            column.AutoIncrement = false;
-            column.Caption = "f''(x)";
-            column.ReadOnly = false;
-            column.Unique = false;
+            //column = new DataColumn();
+            //column.DataType = System.Type.GetType("System.Double");
+            //column.ColumnName = "f''(x)";
+            //column.AutoIncrement = false;
+            //column.Caption = "f''(x)";
+            //column.ReadOnly = false;
+            //column.Unique = false;
 
-            dt.Columns.Add(column);
+            //dt.Columns.Add(column);
 
             //DataColumn[] PrimaryKeyColumns = new DataColumn[1];
             //PrimaryKeyColumns[0] = dt.Columns["x"];
@@ -86,7 +86,7 @@ namespace NumberMethods
                 row = dt.NewRow();
                 row["x"] = Math.Round(i, 1);
                 row["f(x)"] = fx;
-                row["f''(x)"] = der;
+                //row["f''(x)"] = der;
                 dt.Rows.Add(row);
             }
             listBox1.Items.Add(dt);

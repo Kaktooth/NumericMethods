@@ -238,5 +238,71 @@ namespace NumberMethods
             Iteration2(counter, a, xi, e, values);
 
         }
+        public static void RelaxIteration(int xcounter, int counter, double[,] a, double[] b, double[] x, double e, Dictionary<int, List<(double, double, double, double, double, double)>> values, bool[] delta0)
+        {
+                counter++;
+                
+                var list = new List<(double, double, double, double, double, double)>();
+                var delta = new double[3];
+                //if (delta0[0] == false)
+                //{
+                    delta[0] = a[0, 0] * x[0] + a[0, 1] * x[1] + a[0, 2] * x[2] - b[0];
+               // }
+                //if (delta0[1] == false)
+                //{
+                    delta[1] = a[1, 0] * x[0] + a[1, 1] * x[1] + a[1, 2] * x[2] - b[1];
+                //}
+                //if (delta0[2] == false)
+               // {
+                    delta[2] = a[2, 0] * x[0] + a[2, 1] * x[1] + a[2, 2] * x[2] - b[2];
+               // }
+                var deltaAbs = new double[3];
+                deltaAbs[0] = Math.Abs(delta[0]);
+                deltaAbs[1] = Math.Abs(delta[1]);
+                deltaAbs[2] = Math.Abs(delta[2]);
+                var sorted = deltaAbs;
+                Array.Sort(sorted);
+                int index = 0;
+                for (int i = 0; i < deltaAbs.Length; i++)
+                {
+                    if (sorted[2] == Math.Abs(delta[i]))
+                    {
+                        index = i;
+                        delta0[index] = true;
+                    }
+                }
+                double maxDelta = delta[index];
+
+                if (xcounter == 0)
+                {
+                    x[xcounter] = (b[xcounter] - a[index, 1] * x[1] + a[index, 2] * x[2]) / a[index, 0];
+                    xcounter++;
+                }
+                else if (xcounter == 1)
+                {
+                    x[xcounter] = (b[xcounter] - a[index, 0] * x[0]+ a[index, 2] * x[2]) / a[index, 1];
+                    xcounter++;
+                }
+                else if (xcounter == 2)
+                {
+                    x[xcounter] = (b[xcounter] - a[index, 0] * x[0] + a[index, 1] * x[1]) / a[index, 2];
+                    delta0 = new bool[3];
+                    xcounter = 0;
+                }
+
+                list.Add((delta[0], delta[1], delta[2], x[0], x[1], x[2]));
+                values.Add(counter, list);
+                if (Math.Abs(maxDelta) <= e)
+                {
+                    stepText += $"Answer: Max Delta = {maxDelta}, x = [ {x[0]}, {x[1]}, {x[2]}]\r\n";
+                    return;
+                }
+                else
+                {
+                    RelaxIteration(xcounter, counter, a, b, x, e, values, delta0);
+                }
+          
+        }
+
     }
 }

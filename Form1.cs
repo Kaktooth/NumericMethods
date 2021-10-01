@@ -15,5 +15,11 @@ namespace NumberMethods
             ChordMethod newform = new ChordMethod();
             newform.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Relaxation relaxationForm = new Relaxation();
+            relaxationForm.Show();
+        }
     }
 }

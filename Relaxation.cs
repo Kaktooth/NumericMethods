@@ -60,11 +60,11 @@ namespace NumberMethods
 
             }
 
-           a = Multiplication(aT, a);
+            a = Multiplication(aT, a);
             for (int i = 0; i < 3; i++)
             {
-               b[i] = aT[i, 0] * b[0] + aT[i, 1] * b[1] + aT[i, 2] * b[2];
-             }
+                b[i] = aT[i, 0] * b[0] + aT[i, 1] * b[1] + aT[i, 2] * b[2];
+            }
 
             for (int i = 0; i < 3; i++)
             {

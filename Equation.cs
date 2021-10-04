@@ -278,7 +278,7 @@ namespace NumberMethods
             values.Add(counter, list);
             if (Math.Abs(maxDelta) <= e)
             {
-                stepText += $"Answer: Max Delta = {maxDelta}, x = [ {x[0]}, {x[1]}, {x[2]}]\r\n";
+                stepText += $"Answer: Max Delta = {Math.Round(maxDelta, 4)}, x = [ {Math.Round(x[0], 4)}, {Math.Round(x[1], 4)}, {Math.Round(x[2], 4)}]\r\n";
                 return;
             }
             else

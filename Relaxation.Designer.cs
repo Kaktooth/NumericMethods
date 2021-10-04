@@ -267,9 +267,9 @@ namespace NumberMethods
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 25;
-            this.listBox1.Location = new System.Drawing.Point(1282, 30);
+            this.listBox1.Location = new System.Drawing.Point(859, 30);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(475, 1004);
+            this.listBox1.Size = new System.Drawing.Size(898, 1004);
             this.listBox1.TabIndex = 23;
             this.listBox1.SelectedValueChanged += new System.EventHandler(this.listBox1_SelectedValueChanged);
             // 
@@ -311,11 +311,11 @@ namespace NumberMethods
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(131, 279);
+            this.dataGridView1.Location = new System.Drawing.Point(121, 279);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(1130, 755);
+            this.dataGridView1.Size = new System.Drawing.Size(712, 755);
             this.dataGridView1.TabIndex = 1;
             // 
             // Relaxation

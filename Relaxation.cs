@@ -51,20 +51,20 @@ namespace NumberMethods
             b[2] = Convert.ToDouble(textBox12.Text);
 
 
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    for (int j = 0; j < 3; j++)
-            //    {
-            //        aT[i, j] = a[j, i];
-            //    }
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    aT[i, j] = a[j, i];
+                }
 
-            //}
+            }
 
-            //a = Multiplication(aT, a);
-            // for (int i = 0; i < 3; i++)
-            //{
-            //   b[i] = aT[i, 0] * b[0] + aT[i, 1] * b[1] + aT[i, 2] * b[2];
-            // }
+           a = Multiplication(aT, a);
+            for (int i = 0; i < 3; i++)
+            {
+               b[i] = aT[i, 0] * b[0] + aT[i, 1] * b[1] + aT[i, 2] * b[2];
+             }
 
             for (int i = 0; i < 3; i++)
             {

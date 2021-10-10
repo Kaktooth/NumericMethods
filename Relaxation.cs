@@ -77,14 +77,16 @@ namespace NumberMethods
 
             Dictionary<int, List<(double, double, double, double, double, double)>> values = new Dictionary<int, List<(double, double, double, double, double, double)>>();
             var list = new List<(double, double, double, double, double, double)>();
-
+            List<double> x1Sum = new List<double>();
+            List<double> x2Sum = new List<double>();
+            List<double> x3Sum = new List<double>();
             list.Add((0, 0, 0, x[0], x[1], x[2]));
             values.Add(0, list);
 
             var thread = new Thread(
             () =>
             {
-                Equation.RelaxIteration(0, 0, P, c, x, E, values, new double[3], 0);
+                Equation.RelaxIteration(0, 0, P, c, x, E, values, new double[3], 0,x1Sum,x2Sum,x3Sum);
             });
             thread.Start();
             thread.Join();
@@ -102,8 +104,24 @@ namespace NumberMethods
                 data.row["x3"] = values[j][0].Item5;
                 data.dt.Rows.Add(data.row);
             }
+            double sum1 = 0;
+            double sum2 = 0;
+            double sum3 = 0;
+            foreach (var i in x1Sum)
+            {
+                sum1 += i;
+            }
+            foreach (var i in x2Sum)
+            {
+                sum2 += i;
+            }
+            foreach (var i in x3Sum)
+            {
+                sum3 += i;
+            }
             listBox1.Items.Add(data.dt);
             listBox1.Items.Add(Equation.stepText);
+            listBox1.Items.Add($"x1 sum: {sum1} x2 sum: {sum2} x3 sum {sum3}");
             Equation.ClearSteps();
         }
         static double[,] Multiplication(double[,] a, double[,] b)

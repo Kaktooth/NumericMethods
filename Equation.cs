@@ -238,7 +238,7 @@ namespace NumberMethods
             Iteration2(counter, a, xi, e, values);
 
         }
-        public static void RelaxIteration(int xcounter, int counter, double[,] a, double[] b, double[] x, double e, Dictionary<int, List<(double, double, double, double, double, double)>> values, double[] prevdelta, int previndex)
+        public static void RelaxIteration(int xcounter, int counter, double[,] a, double[] b, double[] x, double e, Dictionary<int, List<(double, double, double, double, double, double)>> values, double[] prevdelta, int previndex,List<double> x1Sum, List<double> x2Sum, List<double> x3Sum)
         {
             counter++;
 
@@ -257,7 +257,7 @@ namespace NumberMethods
                 delta[1] = prevdelta[1] + (a[1, previndex] * x[previndex]);
                 delta[2] = prevdelta[2] + (a[2, previndex] * x[previndex]);
             }
-
+           
             var deltaAbs = new double[3];
             deltaAbs[0] = Math.Abs(delta[0]);
             deltaAbs[1] = Math.Abs(delta[1]);
@@ -273,6 +273,18 @@ namespace NumberMethods
                 }
             }
             double maxDelta = delta[index];
+            if (index == 0)
+            {
+                x1Sum.Add(Math.Abs(maxDelta));
+            }
+            else if(index == 1)
+            {
+                x2Sum.Add(Math.Abs(maxDelta));
+            }
+            else if(index == 2)
+            {
+                x3Sum.Add(Math.Abs(maxDelta));
+            }
             x[index] = maxDelta;
             list.Add((x[0], delta[0], x[1], delta[1], x[2], delta[2]));
             values.Add(counter, list);
@@ -283,7 +295,7 @@ namespace NumberMethods
             }
             else
             {
-                RelaxIteration(xcounter, counter, a, b, x, e, values, delta, index);
+                RelaxIteration(xcounter, counter, a, b, x, e, values, delta, index,x1Sum,x2Sum,x3Sum);
             }
 
         }

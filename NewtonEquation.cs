@@ -132,9 +132,9 @@ namespace NumberMethods
             prevP[1] = P[1];
             prevDeltaP[0] = deltaP[0];
             prevDeltaP[1] = deltaP[1];
-            
-            P[0] =  P[0]+ deltaP[0];
-            P[1] = P[1]+deltaP[1];
+
+            P[0] = P[0] + deltaP[0];
+            P[1] = P[1] + deltaP[1];
             stepText.Add($"Step: {counter}, X: {P[0]}, Y: {P[1]}");
             stepText.Add($"Check: {NewtonEquation.CalculateFirstFunc(P[0], P[1])}");
             double checkValue = Math.Abs(P[0] - prevP[0]);

@@ -14,75 +14,18 @@ namespace NumberMethods
             sc.Language = "VBScript";
 
         }
+        public static List<(double, double, double)> x123 = new List<(double, double, double)>();
         static string expression { get; set; }
         static MSScriptControl.ScriptControl sc;
         public static string stepText;
 
         public static double CalculateF(double x)
         {
-            //    if (x > 2147483647 && x < -2147483647)
-            //    {
-            //        MessageBox.Show("Argument Exception");
-            //        throw new ArgumentException();
-            //    }
-            //if (x.ToString().Length >= 15)
-            //{
-            //    x = Math.Round(x, 4);
-            //}
-
-            //try
-            //{
-
             Math.Round(x, 4);
             var replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
             return sc.Eval(replacedExpression);
-
-            //}
-            //catch(System.Runtime.InteropServices.COMException ex)
-            //{
-            //MessageBox.Show(ex.Message);
-            //}
-            //return 0;
-            //try
-            //{
-
-            //}
-            //catch (Exception ex)
-            //{
-            //double sin = 0;
-            //double num = 0;
-
-            //for (int i = 0; i < expression.Length; i++)
-            //{
-            //    bool func = false;
-
-            //    if(expression[i] == 's')
-            //    {
-            //        func = true;
-            //    }
-            //    if(expression[i] == '^'&&func == true)
-            //    {
-            //         num = Convert.ToDouble(expression.Split('^')[1].Split(')')[0]);
-            //    }
-
-            //}
-            //if (num != 0)
-            //{
-            //     sin = Math.Sin(Math.Pow(num, 3));
-            //}
-            //else
-            //{
-            //    sin = Math.Sin(num);
-            //}
-            //string s = expression.Split('s')[1].Split(')')[0];
-            //replacedExpression = expression.Replace(s, sin.ToString().Replace(',', '.'));
-            //result = sc.Eval(replacedExpression);
-            //    result = 0;
-
-            //}
-
-
         }
+
         public static double CalculateDerivative(double fx)
         {
             double result;
@@ -93,6 +36,7 @@ namespace NumberMethods
             return result;
 
         }
+
         public static double CalculateSecondDerivative(double fx, int sign)
         {
             double result;
@@ -115,10 +59,12 @@ namespace NumberMethods
             }
 
         }
+
         public static void ClearSteps()
         {
             stepText = "";
         }
+
         public static void Iteration(int counter, double x, double a, double b, double e, Dictionary<int, List<double>> values)
         {
             //try
@@ -195,7 +141,7 @@ namespace NumberMethods
                 {
                     pointslist.Add(new PointF(j * scaleX + (width / 2), -(float)Equation.CalculateF(j) * scaleY + (height / 2)));
                 }
-                //(float)values[j + 1][1] * 30 +
+
                 g.DrawLine(pen2, new Point(0, -height), new Point(0, height));
                 g.DrawLine(pen2, new Point(width, (height / 2)), new Point(-width, (height / 2)));
                 pointslist.Reverse();
@@ -238,7 +184,7 @@ namespace NumberMethods
             Iteration2(counter, a, xi, e, values);
 
         }
-        public static void RelaxIteration(int xcounter, int counter, double[,] a, double[] b, double[] x, double e, Dictionary<int, List<(double, double, double, double, double, double)>> values, double[] prevdelta, int previndex,List<double> x1Sum, List<double> x2Sum, List<double> x3Sum)
+        public static void RelaxIteration(int xcounter, int counter, double[,] a, double[] b, double[] x, double e, Dictionary<int, List<(double, double, double, double, double, double)>> values, double[] prevdelta, int previndex, List<double> x1Sum, List<double> x2Sum, List<double> x3Sum)
         {
             counter++;
 
@@ -257,7 +203,7 @@ namespace NumberMethods
                 delta[1] = prevdelta[1] + (a[1, previndex] * x[previndex]);
                 delta[2] = prevdelta[2] + (a[2, previndex] * x[previndex]);
             }
-           
+
             var deltaAbs = new double[3];
             deltaAbs[0] = Math.Abs(delta[0]);
             deltaAbs[1] = Math.Abs(delta[1]);
@@ -277,11 +223,11 @@ namespace NumberMethods
             {
                 x1Sum.Add(Math.Abs(maxDelta));
             }
-            else if(index == 1)
+            else if (index == 1)
             {
                 x2Sum.Add(Math.Abs(maxDelta));
             }
-            else if(index == 2)
+            else if (index == 2)
             {
                 x3Sum.Add(Math.Abs(maxDelta));
             }
@@ -290,12 +236,13 @@ namespace NumberMethods
             values.Add(counter, list);
             if (Math.Abs(maxDelta) <= e)
             {
+                x123.Add((x[0], x[1], x[2]));
                 stepText += $"Answer: Max Delta = {Math.Round(maxDelta, 4)}, x = [ {Math.Round(x[0], 4)}, {Math.Round(x[1], 4)}, {Math.Round(x[2], 4)}]\r\n";
                 return;
             }
             else
             {
-                RelaxIteration(xcounter, counter, a, b, x, e, values, delta, index,x1Sum,x2Sum,x3Sum);
+                RelaxIteration(xcounter, counter, a, b, x, e, values, delta, index, x1Sum, x2Sum, x3Sum);
             }
 
         }

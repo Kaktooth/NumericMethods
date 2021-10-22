@@ -21,5 +21,11 @@ namespace NumberMethods
             Relaxation relaxationForm = new Relaxation();
             relaxationForm.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            NewtonMethod newtonMethod = new NewtonMethod();
+            newtonMethod.Show();
+        }
     }
 }

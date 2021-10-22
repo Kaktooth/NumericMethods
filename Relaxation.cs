@@ -49,7 +49,7 @@ namespace NumberMethods
             a[2, 1] = textBox10.Text == "" ? a[2, 1] = 1 : textBox10.Text == "-" ? a[2, 1] = -1 : a[2, 1] = Convert.ToDouble(textBox10.Text);
             a[2, 2] = textBox11.Text == "" ? a[2, 2] = 1 : textBox11.Text == "-" ? a[2, 2] = -1 : a[2, 2] = Convert.ToDouble(textBox11.Text);
             b[2] = Convert.ToDouble(textBox12.Text);
-
+            var matrix = a;
 
             for (int i = 0; i < 3; i++)
             {
@@ -86,7 +86,7 @@ namespace NumberMethods
             var thread = new Thread(
             () =>
             {
-                Equation.RelaxIteration(0, 0, P, c, x, E, values, new double[3], 0,x1Sum,x2Sum,x3Sum);
+                Equation.RelaxIteration(0, 0, P, c, x, E, values, new double[3], 0, x1Sum, x2Sum, x3Sum);
             });
             thread.Start();
             thread.Join();
@@ -104,6 +104,25 @@ namespace NumberMethods
                 data.row["x3"] = values[j][0].Item5;
                 data.dt.Rows.Add(data.row);
             }
+            double eq1 = 0;
+            double eq2 = 0;
+            double eq3 = 0;
+            for (int i = 0; i < 3; i++)
+            {
+                if (i == 0)
+                {
+                    eq1 = matrix[i, 0] * Equation.x123[0].Item1 + matrix[i, 1] * Equation.x123[0].Item2 + matrix[i, 2] * Equation.x123[0].Item3;
+                }
+                else if (i == 1)
+                {
+                    eq2 = matrix[i, 0] * Equation.x123[0].Item1 + matrix[i, 1] * Equation.x123[0].Item2 + matrix[i, 2] * Equation.x123[0].Item3;
+                }
+                else if (i == 2)
+                {
+                    eq3 = matrix[i, 0] * Equation.x123[0].Item1 + matrix[i, 1] * Equation.x123[0].Item2 + matrix[i, 2] * Equation.x123[0].Item3;
+                }
+            }
+
             double sum1 = 0;
             double sum2 = 0;
             double sum3 = 0;
@@ -122,6 +141,7 @@ namespace NumberMethods
             listBox1.Items.Add(data.dt);
             listBox1.Items.Add(Equation.stepText);
             listBox1.Items.Add($"x1 sum: {sum1} x2 sum: {sum2} x3 sum {sum3}");
+            listBox1.Items.Add($"Checking values: 1. {eq1} 2. {eq2} 3. {eq3} {c[0]} {c[1]} {c[2]}");
             Equation.ClearSteps();
         }
         static double[,] Multiplication(double[,] a, double[,] b)

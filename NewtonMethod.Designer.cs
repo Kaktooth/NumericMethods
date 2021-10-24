@@ -73,7 +73,6 @@ namespace NumberMethods
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(130, 31);
             this.textBox3.TabIndex = 3;
-            this.textBox3.Visible = false;
             // 
             // textBox4
             // 
@@ -81,7 +80,6 @@ namespace NumberMethods
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(130, 31);
             this.textBox4.TabIndex = 4;
-            this.textBox4.Visible = false;
             // 
             // label1
             // 
@@ -91,7 +89,6 @@ namespace NumberMethods
             this.label1.Size = new System.Drawing.Size(30, 25);
             this.label1.TabIndex = 5;
             this.label1.Text = "x1";
-            this.label1.Visible = false;
             // 
             // label2
             // 
@@ -101,7 +98,6 @@ namespace NumberMethods
             this.label2.Size = new System.Drawing.Size(30, 25);
             this.label2.TabIndex = 6;
             this.label2.Text = "x2";
-            this.label2.Visible = false;
             // 
             // listBox1
             // 

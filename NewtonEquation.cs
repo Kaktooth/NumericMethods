@@ -99,8 +99,8 @@ namespace NumberMethods
             //J[1, 0] = -1;
             //J[1, 1] = 8 * x2;
             stepText.Add($"deratives: 1) {J[0, 0]}, 3) {J[0, 1]}, 3) {J[1, 0]}, 4) {J[1, 1]}");
-            stepText.Add($"|{J[0, 0]}|+ |{J[0, 1]}| = {J[0, 0] + J[0, 1]} < 1");
-            stepText.Add($"|{J[1, 0]}|+ |{J[1, 1]}| = {J[1, 0] + J[1, 1]} < 1");
+            stepText.Add($"|{J[0, 0]}|+ |{J[0, 1]}| = {Math.Abs(J[0, 0] + J[0, 1])} < 1");
+            stepText.Add($"|{J[1, 0]}|+ |{J[1, 1]}| = {Math.Abs(J[1, 0] + J[1, 1])} < 1");
             //var P = NewtonEquation.Multiplication(F, J);
             double[] P = NewtonEquation.Multiplication(J, F);
             double[] prevP = new double[2];
@@ -137,7 +137,7 @@ namespace NumberMethods
             P[1] = P[1] + deltaP[1];
             stepText.Add($"Step: {counter}, X: {P[0]}, Y: {P[1]}");
             stepText.Add($"Check: {NewtonEquation.CalculateFirstFunc(P[0], P[1])}");
-            double checkValue = Math.Abs(P[0] - prevP[0]);
+            double checkValue = Math.Abs(Math.Abs(P[0]) - Math.Abs(prevP[0]));
             if (checkValue < e && counter != 0)
             {
                 stepText.Add($"Result: X: {P[0]}, Y: {P[1]} < e: {e}");

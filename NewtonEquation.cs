@@ -99,16 +99,16 @@ namespace NumberMethods
             //J[1, 0] = -1;
             //J[1, 1] = 8 * x2;
             stepText.Add($"deratives: 1) {J[0, 0]}, 3) {J[0, 1]}, 3) {J[1, 0]}, 4) {J[1, 1]}");
-            stepText.Add($"|{J[0, 0]}|+ |{J[0, 1]}| = {Math.Abs(J[0, 0] + J[0, 1])} < 1");
-            stepText.Add($"|{J[1, 0]}|+ |{J[1, 1]}| = {Math.Abs(J[1, 0] + J[1, 1])} < 1");
+            stepText.Add($"|{J[0, 0]}|+ |{J[0, 1]}| = {Math.Abs(J[0, 0]) + Math.Abs(J[0, 1])} < 1");
+            stepText.Add($"|{J[1, 0]}|+ |{J[1, 1]}| = {Math.Abs(J[1, 0]) + Math.Abs(J[1, 1])} < 1");
             //var P = NewtonEquation.Multiplication(F, J);
             double[] P = NewtonEquation.Multiplication(J, F);
             double[] prevP = new double[2];
             double[] prevDeltaP = new double[2];
             stepText.Add($"P: {P[0]} {P[1]}");
-            Newton(0, P0, x1, x2, prevDeltaP, e, prevP);
+            Newton(0, P0,P0, x1, x2, prevDeltaP, e, prevP);
         }
-        public static void Newton(int counter, double[] P, double x1, double x2, double[] prevDeltaP, float e, double[] prevP)
+        public static void Newton(int counter, double[] P0, double[] P, double x1, double x2, double[] prevDeltaP, float e, double[] prevP)
         {
             double[] F = new double[2];
             P[0] = x1;
@@ -133,8 +133,8 @@ namespace NumberMethods
             prevDeltaP[0] = deltaP[0];
             prevDeltaP[1] = deltaP[1];
 
-            P[0] = P[0] + deltaP[0];
-            P[1] = P[1] + deltaP[1];
+            P[0] = P0[0] + deltaP[0];
+            P[1] = P0[1] + deltaP[1];
             stepText.Add($"Step: {counter}, X: {P[0]}, Y: {P[1]}");
             stepText.Add($"Check: {NewtonEquation.CalculateFirstFunc(P[0], P[1])}");
             double checkValue = Math.Abs(Math.Abs(P[0]) - Math.Abs(prevP[0]));
@@ -146,7 +146,7 @@ namespace NumberMethods
             else
             {
                 counter++;
-                Newton(counter, P, P[0], P[1], prevDeltaP, e, prevP);
+                Newton(counter, P0,P, P[0], P[1], prevDeltaP, e, prevP);
             }
         }
     }

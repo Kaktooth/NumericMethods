@@ -24,7 +24,8 @@ namespace NumberMethods
 
             //double x1 = 2f;
             //double x2 = 0.25f;
-            float E = 0.0001f;
+            //float E = 0.0001f;
+            float E = (float)Convert.ToDouble(textBox5.Text);
             NewtonEquation.ShowResult(x1, x2, E);
             foreach (var Text in NewtonEquation.stepText)
             {

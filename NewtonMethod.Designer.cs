@@ -116,7 +116,6 @@ namespace NumberMethods
             this.label3.Size = new System.Drawing.Size(21, 25);
             this.label3.TabIndex = 9;
             this.label3.Text = "e";
-            this.label3.Visible = false;
             // 
             // textBox5
             // 
@@ -124,7 +123,6 @@ namespace NumberMethods
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(130, 31);
             this.textBox5.TabIndex = 8;
-            this.textBox5.Visible = false;
             // 
             // NewtonMethod
             // 

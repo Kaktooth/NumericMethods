@@ -27,5 +27,11 @@ namespace NumberMethods
             NewtonMethod newtonMethod = new NewtonMethod();
             newtonMethod.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Interpolation interpolation = new Interpolation();
+            interpolation.Show();
+        }
     }
 }

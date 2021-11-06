@@ -21,9 +21,17 @@ namespace NumberMethods
 
         public static double CalculateF(double x)
         {
-            Math.Round(x, 4);
-            var replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
-            return sc.Eval(replacedExpression);
+            if (x != 0)
+            {
+                Math.Round(x, 4);
+                var replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
+
+                return sc.Eval(replacedExpression);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public static double CalculateDerivative(double fx)

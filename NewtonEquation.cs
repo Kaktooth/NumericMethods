@@ -106,7 +106,7 @@ namespace NumberMethods
             double[] prevP = new double[2];
             double[] prevDeltaP = new double[2];
             stepText.Add($"P: {P[0]} {P[1]}");
-            Newton(0, P0,P0, x1, x2, prevDeltaP, e, prevP);
+            Newton(0, P0, P0, x1, x2, prevDeltaP, e, prevP);
         }
         public static void Newton(int counter, double[] P0, double[] P, double x1, double x2, double[] prevDeltaP, float e, double[] prevP)
         {
@@ -146,7 +146,7 @@ namespace NumberMethods
             else
             {
                 counter++;
-                Newton(counter, P0,P, P[0], P[1], prevDeltaP, e, prevP);
+                Newton(counter, P0, P, P[0], P[1], prevDeltaP, e, prevP);
             }
         }
     }

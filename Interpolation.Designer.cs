@@ -43,6 +43,7 @@ namespace NumberMethods
             this.button1 = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -146,7 +147,7 @@ namespace NumberMethods
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(21, 328);
+            this.button1.Location = new System.Drawing.Point(21, 436);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(158, 48);
             this.button1.TabIndex = 12;
@@ -173,11 +174,22 @@ namespace NumberMethods
             this.label3.TabIndex = 14;
             this.label3.Text = "The vertical line is the Lagrange polynomial, the dotted line is the spline";
             // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(21, 346);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(168, 29);
+            this.checkBox4.TabIndex = 15;
+            this.checkBox4.Text = "difference graph";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
             // Interpolation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1359, 793);
+            this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.button1);
@@ -218,5 +230,6 @@ namespace NumberMethods
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

@@ -48,6 +48,7 @@ namespace NumberMethods
                 Pen pen3 = new Pen(Color.Red, 2);
                 Pen pen4 = new Pen(Color.Blue, 1);
                 List<PointF> pointslist = new List<PointF>();
+                List<PointF> pointslist2 = new List<PointF>();
 
                 //Draw curve
                 for (float X = (float)minX - 1; X < maxX + 1; X += 0.1f)
@@ -127,9 +128,52 @@ namespace NumberMethods
                         g.DrawRectangle(pen3, p.X, p.Y, 5, 5);
                     }
                 }
-             
+                
+                if (checkBox4.Checked)
+                {
+                    double vL = 0;
+                    for (int X = (int)minX; X < maxX + 1; X++)
+                    {
+                        double L = 0;
+                        double l = 0;
+                        double dividend = 1;
+                        double divisor = 1;
+                        int j = 0;
+
+                        do
+                        {
+                            for (var m = 0; m < n + 1; m++)
+                            {
+                                if (m == j)
+                                {
+                                    continue;
+                                }
+                                dividend *= X - x[m];
+                                divisor *= (x[j] - x[m]);
+                                l = dividend / divisor;
+                            }
+                            if (!Double.IsNaN(l) && !Double.IsInfinity(l))
+                            {
+                                L += y[j] * l;
+                            }
+                            dividend = 1;
+                            divisor = 1;
+                            j++;
+                        }
+                        while (j < n + 1);
+
+                        PointF p = new PointF(X * trackBar1.Value, -(float)(L-vL) * trackBar2.Value + (pictureBox1.Height / 2));
+                        pointslist2.Add(new PointF(p.X, p.Y));
+                        if (x.Contains(MathF.Round(X, 0)))
+                        {
+                            vL = L;
+                        }
+                    }
+                }
                 pointslist.Reverse();
                 g.DrawLines(pen, pointslist.ToArray());
+                pointslist2.Reverse();
+                g.DrawLines(pen3, pointslist2.ToArray());
 
             }
         }

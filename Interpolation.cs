@@ -127,7 +127,7 @@ namespace NumberMethods
                         g.DrawRectangle(pen3, p.X, p.Y, 5, 5);
                     }
                 }
-
+             
                 pointslist.Reverse();
                 g.DrawLines(pen, pointslist.ToArray());
 
@@ -251,20 +251,26 @@ namespace NumberMethods
                     P = ((splineSet[i].Item4 * w + splineSet[i].Item3) * w + splineSet[i].Item2) * w + y[i];
 
                     g.DrawRectangle(pen4, (float)(X * trackBar1.Value * maxh), (pictureBox1.Height / 2), 1, 1);
-
+                  
                     pointslist.Add(new PointF((float)(X * trackBar1.Value * maxh), -(float)P * trackBar2.Value + (pictureBox1.Height / 2)));
-                    if (checkBox3.Checked == true)
-                    {
-                        g.FillRectangle(Brushes.White, (float)(X * trackBar1.Value * maxh) - Convert.ToInt32(3 / 2), -(float)P * trackBar2.Value + (pictureBox1.Height / 2) - Convert.ToInt32(3 / 2), 3, 3);
-                    }
+
+                    
 
                 }
                 pointslist.Reverse();
                 g.DrawLines(pen, pointslist.ToArray());
 
-
-
-
+                for (float X = 0; X < splineSet.Count; X += 0.1f)
+                {
+                    double P = 0;
+                    int i = (int)X;
+                    double w = X - splineSet[i].Item5;
+                    P = ((splineSet[i].Item4 * w + splineSet[i].Item3) * w + splineSet[i].Item2) * w + y[i];
+                    if (checkBox3.Checked == true)
+                    {
+                        g.FillRectangle(Brushes.White, (float)(X * trackBar1.Value * maxh) - Convert.ToInt32(3 / 2), -(float)P * trackBar2.Value + (pictureBox1.Height / 2) - Convert.ToInt32(3 / 2), 3, 3);
+                    }
+                }
 
                 //Draw points
                 listBox1.Items.Clear();
@@ -281,9 +287,9 @@ namespace NumberMethods
                     g.FillEllipse(Brushes.Blue, p.X - Convert.ToInt32(15 / 2), p.Y - Convert.ToInt32(15 / 2), 15, 15);
                 }
 
-
-
-
+              
+                
+               
             }
         }
 

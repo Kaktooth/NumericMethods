@@ -168,7 +168,6 @@ namespace NumberMethods
                 }
 
                 double[] h = new double[n];
-                double[] H = new double[n];
                 for (int i = 0; i < n; i++)
                 {
                     h[i] = x[i + 1] - x[i];
@@ -179,7 +178,6 @@ namespace NumberMethods
                 double maxh = sortedh[sortedh.Length - 1];
                 for (int i = 0; i < n; i++)
                 {
-                    H[i] = h[i];
                     x[i + 1] /= maxh;
                 }
                 for (int i = 0; i < n; i++)

@@ -59,14 +59,14 @@ namespace NumberMethods
                     int j = 0;
                     do
                     {
-                        for (var k = 0; k < n + 1; k++)
+                        for (var m = 0; m < n + 1; m++)
                         {
-                            if (k == j)
+                            if (m == j)
                             {
                                 continue;
                             }
-                            dividend *= X - x[k];
-                            divisor *= (x[j] - x[k]);
+                            dividend *= X - x[m];
+                            divisor *= (x[j] - x[m]);
                             l = dividend / divisor;
                         }
                         if (!Double.IsNaN(l) && !Double.IsInfinity(l))
@@ -95,14 +95,14 @@ namespace NumberMethods
 
                     do
                     {
-                        for (var k = 0; k < n + 1; k++)
+                        for (var m = 0; m < n + 1; m++)
                         {
-                            if (k == j)
+                            if (m == j)
                             {
                                 continue;
                             }
-                            dividend *= X - x[k];
-                            divisor *= (x[j] - x[k]);
+                            dividend *= X - x[m];
+                            divisor *= (x[j] - x[m]);
                             l = dividend / divisor;
                         }
                         if (!Double.IsNaN(l) && !Double.IsInfinity(l))
@@ -127,8 +127,7 @@ namespace NumberMethods
                         g.DrawRectangle(pen3, p.X, p.Y, 5, 5);
                     }
                 }
-                //g.DrawLine(pen2, new Point(0, -pictureBox1.Height), new Point(0, pictureBox1.Height));
-                //g.DrawLine(pen2, new Point(pictureBox1.Width, (pictureBox1.Height / 2)), new Point(-pictureBox1.Width, (pictureBox1.Height / 2)));
+             
                 pointslist.Reverse();
                 g.DrawLines(pen, pointslist.ToArray());
 
@@ -152,7 +151,6 @@ namespace NumberMethods
             using (Graphics g = Graphics.FromImage(pictureBox1.Image))
             {
 
-                //Lagrange
                 Pen pen = new Pen(Color.BlueViolet, 3);
                 Pen pen2 = new Pen(Color.Black, 1);
                 Pen pen3 = new Pen(Color.Red, 2);
@@ -184,7 +182,6 @@ namespace NumberMethods
                 {
                     h[i] = x[i + 1] - x[i];
                 }
-
 
                 double[] Sk1 = new double[n];
                 double[] Sk2 = new double[n];
@@ -235,7 +232,6 @@ namespace NumberMethods
 
                 for (int i = 0; i < n; i++)
                 {
-
                     splineSet.Add(i, (Sk0[i], Sk1[i], Sk2[i], Sk3[i], x[i]));
 
                 }
@@ -257,8 +253,6 @@ namespace NumberMethods
                     g.DrawRectangle(pen4, (float)(X * trackBar1.Value * maxh), (pictureBox1.Height / 2), 1, 1);
 
                     pointslist.Add(new PointF((float)(X * trackBar1.Value * maxh), -(float)P * trackBar2.Value + (pictureBox1.Height / 2)));
-
-
                 }
 
                 //Draw points
@@ -274,8 +268,6 @@ namespace NumberMethods
 
                     listBox1.Items.Add($"X: {x[i] * maxh}, Y: {y[i]}");
                     g.FillEllipse(Brushes.Blue, p.X - Convert.ToInt32(15 / 2), p.Y - Convert.ToInt32(15 / 2), 15, 15);
-
-
                 }
 
                 pointslist.Reverse();

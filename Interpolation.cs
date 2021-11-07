@@ -15,6 +15,7 @@ namespace NumberMethods
 
         private void button1_Click(object sender, EventArgs e)
         {
+            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             if (checkBox1.Checked == true)
             {
                 Lagrange();
@@ -35,8 +36,10 @@ namespace NumberMethods
             Array.Sort(sortedX);
             double maxX = sortedX[sortedX.Length - 1];
             double minX = sortedX[0];
-
-            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            if (pictureBox1.Image == null)
+            {
+                pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            }
             using (Graphics g = Graphics.FromImage(pictureBox1.Image))
             {
                 //Lagrange
@@ -56,22 +59,14 @@ namespace NumberMethods
                     int j = 0;
                     do
                     {
-                        if (j == 0)
+                        for (var k = 0; k < n + 1; k++)
                         {
-                            dividend *= (X - x[1]) * (X - x[2]);
-                            divisor *= (x[j] - x[1]) * (x[j] - x[2]);
-                            l = dividend / divisor;
-                        }
-                        else if (j >= n)
-                        {
-                            dividend *= (X - x[n - 2]) * (X - x[n - 1]);
-                            divisor *= (x[j] - x[n - 2]) * (x[j] - x[n - 1]);
-                            l = dividend / divisor;
-                        }
-                        else
-                        {
-                            dividend *= (X - x[j - 1]) * (X - x[j + 1]);
-                            divisor *= (x[j] - x[j - 1]) * (x[j] - x[j + 1]);
+                            if (k == j)
+                            {
+                                continue;
+                            }
+                            dividend *= X - x[k];
+                            divisor *= (x[j] - x[k]);
                             l = dividend / divisor;
                         }
                         if (!Double.IsNaN(l) && !Double.IsInfinity(l))
@@ -90,42 +85,29 @@ namespace NumberMethods
                 }
                 //Draw points
                 listBox1.Items.Clear();
-                for (int X = (int)minX - 1; X < maxX + 1; X++)
+                for (int X = (int)minX; X < maxX + 1; X++)
                 {
                     double L = 0;
                     double l = 0;
                     double dividend = 1;
                     double divisor = 1;
                     int j = 0;
+
                     do
                     {
-                        if (j == 0)
+                        for (var k = 0; k < n + 1; k++)
                         {
-                            dividend *= (X - x[1]) * (X - x[2]);
-                            divisor *= (x[j] - x[1]) * (x[j] - x[2]);
+                            if (k == j)
+                            {
+                                continue;
+                            }
+                            dividend *= X - x[k];
+                            divisor *= (x[j] - x[k]);
                             l = dividend / divisor;
-                            //x = 0 - 2, L = 24
-                        }
-                        else if (j >= n)
-                        {
-                            dividend *= (X - x[n - 2]) * (X - x[n - 1]);
-                            divisor *= (x[j] - x[n - 2]) * (x[j] - x[n - 1]);
-                            l = dividend / divisor;
-                            //x = 0 - 1, L = 6
-
-                        }
-                        else
-                        {
-                            dividend *= (X - x[j - 1]) * (X - x[j + 1]);
-                            divisor *= (x[j] - x[j - 1]) * (x[j] - x[j + 1]);
-                            l = dividend / divisor;
-                            //x = 0 - -2, L = -8
                         }
                         if (!Double.IsNaN(l) && !Double.IsInfinity(l))
                         {
                             L += y[j] * l;
-                            //x = 0, L= 22
-                            //x = 1, L= 12
                         }
                         dividend = 1;
                         divisor = 1;
@@ -134,8 +116,11 @@ namespace NumberMethods
                     while (j < n + 1);
 
                     PointF p = new PointF(X * trackBar1.Value, -(float)L * trackBar2.Value + (pictureBox1.Height / 2));
-                    g.DrawString(X.ToString(), new Font(FontFamily.GenericSerif, 8), Brushes.Black, new PointF(p.X, pictureBox1.Height - 30));
-                    g.DrawString(L.ToString(), new Font(FontFamily.GenericSerif, 8), Brushes.Black, new PointF(0, p.Y));
+                    if (!checkBox2.Checked)
+                    {
+                        g.DrawString(X.ToString(), new Font(FontFamily.GenericSerif, 8), Brushes.Black, new PointF(p.X, pictureBox1.Height - 30));
+                        g.DrawString(L.ToString(), new Font(FontFamily.GenericSerif, 8), Brushes.Black, new PointF(0, p.Y));
+                    }
                     if (x.Contains(MathF.Round(X, 0)))
                     {
                         listBox1.Items.Add($"X: {X}, Y: {L}");
@@ -160,7 +145,10 @@ namespace NumberMethods
             double maxX = sortedX[sortedX.Length - 1];
             double minX = sortedX[0];
 
-            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            if (pictureBox1.Image == null)
+            {
+                pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            }
             using (Graphics g = Graphics.FromImage(pictureBox1.Image))
             {
 
@@ -172,7 +160,6 @@ namespace NumberMethods
                 List<PointF> pointslist = new List<PointF>();
 
                 //Calculate spline
-
                 double[] Sk0 = new double[n + 2];
                 for (int i = 0; i < n + 1; i++)
                 {
@@ -228,9 +215,9 @@ namespace NumberMethods
                     U[i] = h[i] / L[i];
                     Z[i] = (u[i] - h[i - 1] * Z[i - 1]) / L[i];
                 }
-                L[n] = 1.00;
-                m[n] = 0.00;
-                Z[n] = 0.00;
+                L[n + 1] = 1.00;
+                m[n + 1] = 0.00;
+                Z[n + 1] = 0.00;
                 for (int j = n - 1; j > -1; j--)
                 {
 
@@ -301,6 +288,7 @@ namespace NumberMethods
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             if (checkBox1.Checked == true)
             {
                 Lagrange();

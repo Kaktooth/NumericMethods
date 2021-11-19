@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NumberMethods
@@ -33,7 +28,7 @@ namespace NumberMethods
 
             //7+2*x^(-2/3)
             int counter = 0;
-            for (int i = a+1; i < b+1; i += l)
+            for (int i = a; i < b; i += l)
             {
                 double h = Math.Abs(b - a) / (k - 1);
                 double fx = Equation.CalculateF(i);
@@ -58,7 +53,7 @@ namespace NumberMethods
                 Pen pen4 = new Pen(Color.Blue, 1);
                 List<PointF> pointslist = new List<PointF>();
                 
-                for (int i = a+1; i < b+1; i++)
+                for (int i = a; i < b; i++)
                 {
                     double y = Equation.CalculateF(i);
                     pointslist.Add(new PointF(i*9, -(float)y * 26+ (pictureBox1.Height / 2)));

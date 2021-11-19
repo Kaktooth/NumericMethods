@@ -46,6 +46,7 @@ namespace NumberMethods
             this.pictureBox1.Size = new System.Drawing.Size(734, 649);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
             // 
             // label1
             // 
@@ -69,7 +70,7 @@ namespace NumberMethods
             this.listBox1.ItemHeight = 25;
             this.listBox1.Location = new System.Drawing.Point(491, 39);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(378, 654);
+            this.listBox1.Size = new System.Drawing.Size(488, 654);
             this.listBox1.TabIndex = 3;
             // 
             // button1

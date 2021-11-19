@@ -33,5 +33,11 @@ namespace NumberMethods
             Interpolation interpolation = new Interpolation();
             interpolation.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            NumericalIntegration numericalIntegration = new NumericalIntegration();
+            numericalIntegration.Show();
+        }
     }
 }

@@ -24,6 +24,10 @@ namespace NumberMethods
             {
                 CubicSpline();
             }
+            if (checkBox5.Checked == true)
+            {
+                CalculateAccuracy();
+            }
             pictureBox1.Refresh();
             GC.Collect();
         }
@@ -128,7 +132,7 @@ namespace NumberMethods
                         g.DrawRectangle(pen3, p.X, p.Y, 5, 5);
                     }
                 }
-                
+
                 if (checkBox4.Checked)
                 {
                     double vL = 0;
@@ -162,7 +166,7 @@ namespace NumberMethods
                         }
                         while (j < n + 1);
 
-                        PointF p = new PointF(X * trackBar1.Value, -(float)(L-vL) * trackBar2.Value + (pictureBox1.Height / 2));
+                        PointF p = new PointF(X * trackBar1.Value, -(float)(L - vL) * trackBar2.Value + (pictureBox1.Height / 2));
                         pointslist2.Add(new PointF(p.X, p.Y));
                         if (x.Contains(MathF.Round(X, 0)))
                         {
@@ -172,8 +176,11 @@ namespace NumberMethods
                 }
                 pointslist.Reverse();
                 g.DrawLines(pen, pointslist.ToArray());
-                pointslist2.Reverse();
-                g.DrawLines(pen3, pointslist2.ToArray());
+                if (checkBox4.Checked)
+                {
+                    pointslist2.Reverse();
+                    g.DrawLines(pen3, pointslist2.ToArray());
+                }
 
             }
         }
@@ -259,15 +266,11 @@ namespace NumberMethods
                 Z[n + 1] = 0.00;
                 for (int j = n - 1; j > -1; j--)
                 {
-
                     m[j] = (Z[j] - U[j] * m[j + 1]);
-
                     //S k,1
                     Sk1[j] = d[j] - (h[j] * (2 * m[j] + m[j + 1])) / 6;
-
                     //S k,2
                     Sk2[j] = m[j] / 2;
-
                     //S k,3
                     Sk3[j] = (m[j + 1] - m[j]) / 6 * h[j];
                 }
@@ -295,10 +298,10 @@ namespace NumberMethods
                     P = ((splineSet[i].Item4 * w + splineSet[i].Item3) * w + splineSet[i].Item2) * w + y[i];
 
                     g.DrawRectangle(pen4, (float)(X * trackBar1.Value * maxh), (pictureBox1.Height / 2), 1, 1);
-                  
+
                     pointslist.Add(new PointF((float)(X * trackBar1.Value * maxh), -(float)P * trackBar2.Value + (pictureBox1.Height / 2)));
 
-                    
+
 
                 }
                 pointslist.Reverse();
@@ -331,12 +334,163 @@ namespace NumberMethods
                     g.FillEllipse(Brushes.Blue, p.X - Convert.ToInt32(15 / 2), p.Y - Convert.ToInt32(15 / 2), 15, 15);
                 }
 
-              
-                
-               
+
+
+
             }
         }
+        private void CalculateAccuracy()
+        {
+            int n = Convert.ToInt32(textBox2.Text);
+            double[] x = Array.ConvertAll(textBox1.Text.Split(',').Select(e => e.Replace('.', ',')).ToArray(), Convert.ToDouble);
+            double[] y = Array.ConvertAll(textBox3.Text.Split(',').Select(e => e.Replace('.', ',')).ToArray(), Convert.ToDouble);
+            double[] sortedX = x;
+            Array.Sort(sortedX);
+            double maxX = sortedX[sortedX.Length - 1];
+            double minX = sortedX[0];
+            //Spline
 
+            double[] Sk0 = new double[n + 2];
+            for (int i = 0; i < n + 1; i++)
+            {
+                //S k,0
+                Sk0[i] = y[i];
+            }
+
+            double[] h = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                h[i] = x[i + 1] - x[i];
+
+            }
+            double[] sortedh = h;
+            Array.Sort(sortedh);
+            double maxh = sortedh[sortedh.Length - 1];
+            for (int i = 0; i < n; i++)
+            {
+                x[i + 1] /= maxh;
+            }
+            for (int i = 0; i < n; i++)
+            {
+                h[i] = x[i + 1] - x[i];
+            }
+
+            double[] Sk1 = new double[n];
+            double[] Sk2 = new double[n];
+            double[] Sk3 = new double[n];
+            double[] d = new double[n];
+            double[] u = new double[n];
+            for (int j = n - 1; j > -1; j--)
+            {
+                d[j] = (y[j + 1] - y[j]) / h[j];
+            }
+
+            for (int i = 1; i < n; i++)
+            {
+                u[i] = 6 * (d[i] - d[i - 1]);
+            }
+            double[] m = new double[n + 2];
+            double[] L = new double[n + 2];
+            double[] U = new double[n + 2];
+            double[] Z = new double[n + 2];
+            L[0] = 1.00;
+            U[0] = 0.00;
+            Z[0] = 0.00;
+            for (int i = 1; i < n; i++)
+            {
+                L[i] = 2 * (x[i + 1] - x[i - 1]) - h[i - 1] * U[i - 1];
+                U[i] = h[i] / L[i];
+                Z[i] = (u[i] - h[i - 1] * Z[i - 1]) / L[i];
+            }
+            L[n + 1] = 1.00;
+            m[n + 1] = 0.00;
+            Z[n + 1] = 0.00;
+            for (int j = n - 1; j > -1; j--)
+            {
+                m[j] = (Z[j] - U[j] * m[j + 1]);
+                //S k,1
+                Sk1[j] = d[j] - (h[j] * (2 * m[j] + m[j + 1])) / 6;
+                //S k,2
+                Sk2[j] = m[j] / 2;
+                //S k,3
+                Sk3[j] = (m[j + 1] - m[j]) / 6 * h[j];
+            }
+            Dictionary<int, (double, double, double, double, double)> splineSet
+                = new Dictionary<int, (double, double, double, double, double)>();
+
+            for (int i = 0; i < n; i++)
+            {
+                splineSet.Add(i, (Sk0[i], Sk1[i], Sk2[i], Sk3[i], x[i]));
+
+            }
+            var P = new List<double>();
+            //Draw curve
+            for (float X = 0; X < splineSet.Count; X += 0.1f)
+            {
+
+
+                int i = (int)X;
+                double w = X - splineSet[i].Item5;
+                P.Add(((splineSet[i].Item4 * w + splineSet[i].Item3) * w + splineSet[i].Item2) * w + y[i]);
+
+            }
+
+            //Lagrange
+
+            var Llist = new List<double>();
+            for (float X = 0; X < maxX; X += 0.3f)
+            {
+                double S = 0;
+                double l = 0;
+                double dividend = 1;
+                double divisor = 1;
+                int j = 0;
+                do
+                {
+                    for (int mn = 0; mn < n + 1; mn++)
+                    {
+                        if (mn == j)
+                        {
+                            continue;
+                        }
+                        dividend *= X - x[mn];
+                        divisor *= (x[j] - x[mn]);
+                        l = dividend / divisor;
+                    }
+                    if (!Double.IsNaN(l) && !Double.IsInfinity(l))
+                    {
+                        S += y[j] * l;
+                    }
+                    dividend = 1;
+                    divisor = 1;
+                    j++;
+                }
+                while (j < n + 1);
+                Llist.Add(S);
+
+            }
+            double maxAccuracy = 0;
+          
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    double accuracy = L[i] - P[i];
+                    if (accuracy > maxAccuracy)
+                    {
+                        maxAccuracy = accuracy;
+                    }
+                    
+                }
+                catch(Exception ex)
+                {
+                    continue;
+                }
+               
+            }
+            listBox1.Items.Add("Accuracy " + maxAccuracy);
+
+        }
         private void button1_Click_1(object sender, EventArgs e)
         {
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -347,6 +501,10 @@ namespace NumberMethods
             if (checkBox2.Checked == true)
             {
                 CubicSpline();
+            }
+            if (checkBox5.Checked == true)
+            {
+                CalculateAccuracy();
             }
             pictureBox1.Refresh();
             GC.Collect();

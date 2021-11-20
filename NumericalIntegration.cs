@@ -19,8 +19,9 @@ namespace NumberMethods
             int b = Convert.ToInt32(textBox2.Text.Split(',')[1]);
             Equation equation = new Equation(expression);
             double S = 0;
+            int n = 20;
             int s = 4;
-            int l = 3;
+            int l = (b - a) / n;
             double m = (b / l);
             double k = (s - 1) * m + 1;
             listBox1.Items.Clear();
@@ -44,7 +45,7 @@ namespace NumberMethods
             }
             listBox1.Items.Add($"S: {S}");
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            
+
             using (Graphics g = Graphics.FromImage(pictureBox1.Image))
             {
                 Pen pen = new Pen(Color.Orange, 3);
@@ -52,16 +53,16 @@ namespace NumberMethods
                 Pen pen3 = new Pen(Color.Red, 2);
                 Pen pen4 = new Pen(Color.Blue, 1);
                 List<PointF> pointslist = new List<PointF>();
-                
+
                 for (int i = a; i < b; i++)
                 {
                     double y = Equation.CalculateF(i);
-                    pointslist.Add(new PointF(i*9, -(float)y * 26+ (pictureBox1.Height / 2)));
+                    if (i != 0) { pointslist.Add(new PointF(i * 9, -(float)y * 26 + (pictureBox1.Height / 2))); }
                 }
                 pointslist.Reverse();
                 g.DrawLines(pen, pointslist.ToArray());
                 pictureBox1.Refresh();
-              
+
             }
         }
 

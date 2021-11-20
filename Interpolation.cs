@@ -470,7 +470,7 @@ namespace NumberMethods
 
             }
             double maxAccuracy = 0;
-          
+
             for (int i = 0; i < 10; i++)
             {
                 try
@@ -480,13 +480,13 @@ namespace NumberMethods
                     {
                         maxAccuracy = accuracy;
                     }
-                    
+
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     continue;
                 }
-               
+
             }
             listBox1.Items.Add("Accuracy " + maxAccuracy);
 

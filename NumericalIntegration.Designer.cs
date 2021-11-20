@@ -41,12 +41,11 @@ namespace NumberMethods
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(875, 39);
+            this.pictureBox1.Location = new System.Drawing.Point(985, 39);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(734, 649);
+            this.pictureBox1.Size = new System.Drawing.Size(624, 649);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
             // 
             // label1
             // 

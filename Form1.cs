@@ -39,5 +39,11 @@ namespace NumberMethods
             NumericalIntegration numericalIntegration = new NumericalIntegration();
             numericalIntegration.Show();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Koshi koshi = new Koshi();
+            koshi.Show();
+        }
     }
 }

@@ -21,17 +21,18 @@ namespace NumberMethods
             double S = 0;
             int n = 20;
             int s = 4;
-            int l = (b - a) / n;
-            double m = (b / l);
+
+            double m = (b / (s - 1));
             double k = (s - 1) * m + 1;
+            double h = Math.Abs(b - a) / (k - 1);
             listBox1.Items.Clear();
             Dictionary<int, (int, double, double)> values = new Dictionary<int, (int, double, double)>();
 
             //7+2*x^(-2/3)
             int counter = 0;
-            for (int i = a; i < b; i += l)
+            for (int i = a; i < b; i += (int)h)
             {
-                double h = Math.Abs(b - a) / (k - 1);
+
                 double fx = Equation.CalculateF(i);
                 double f = ((3 * h) / 8) * (
                     fx
@@ -39,7 +40,7 @@ namespace NumberMethods
                     + 3 * Equation.CalculateF(i + 2)
                     + Equation.CalculateF(i + 3));
                 S += f;
-                values.Add(counter, new(i, fx, f));
+                values.Add(counter, (i, fx, f));
                 listBox1.Items.Add($"X: {i}, Y: {fx}, Integral: {f}");
                 counter++;
             }

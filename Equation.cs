@@ -24,7 +24,28 @@ namespace NumberMethods
             if (x != 0)
             {
                 Math.Round(x, 4);
-                var replacedExpression = expression.Replace("x", x.ToString().Replace(',', '.'));
+                var replacedExpression = expression
+                    .Replace("x", x.ToString().Replace(',', '.'))
+                    .Replace("e", Math.E.ToString().Replace(',', '.'));
+
+                return sc.Eval(replacedExpression);
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public static double CalculateFunction(double x, double y)
+        {
+            if (x != 0 && y != 0)
+            {
+                Math.Round(x, 4);
+                Math.Round(y, 4);
+                var replacedExpression = expression
+                    .Replace("x", x.ToString().Replace(',', '.'))
+                    .Replace("y", y.ToString().Replace(',', '.'))
+                    .Replace("e", Math.E.ToString().Replace(',', '.'));
 
                 return sc.Eval(replacedExpression);
             }

@@ -17,8 +17,8 @@ namespace NumberMethods
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             string expression = textBox1.Text;
             string accurateExpression = textBox2.Text;
-            double a = Convert.ToDouble(textBox3.Text.Split(',')[0]);
-            double b = Convert.ToDouble(textBox3.Text.Split(',')[1]);
+            double a = Convert.ToDouble(textBox3.Text.Split(',')[0].Replace('.', ','));
+            double b = Convert.ToDouble(textBox3.Text.Split(',')[1].Replace('.',','));
             double h = Convert.ToDouble(textBox4.Text);
             double n = Math.Abs(b - a) / h;
             double x0 = Convert.ToDouble(textBox5.Text);
@@ -64,10 +64,10 @@ namespace NumberMethods
             //var step = Heming.CalculateStep(x0, y0);
             // step = Heming.CalculateStep(1, 1);
             var values = Heming.CalculateHeming(minerror, stepValue, x0, y0, h, n, a, b, true);
-            DrawPlot(values, new Pen(Color.Black, 2), Brushes.Red);
+            DrawPlot(values, new Pen(Color.Black, 2.6f), Brushes.Red);
 
             values = Heming.CalculateHeming(minerror, stepValue, x0, y0, h, n, a, b, false);
-            DrawPlot(values, new Pen(Color.Green, 2), Brushes.Red);
+            DrawPlot(values, new Pen(Color.Green, 2.6f), Brushes.Red);
         }
         public void DrawPlot(List<(double, double)> values, Pen graphicPen, Brush dotsBrush)
         {

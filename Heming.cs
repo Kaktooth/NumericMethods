@@ -16,7 +16,9 @@ namespace NumberMethods
         }
         public static List<(double, double)> CalculateHeming(double minError, double stepValue, double x, double y, double h, double n, double a, double b, bool withControlElement)
         {
+            
             List<(double, double)> values = new List<(double, double)>();
+            values.Add((x, y));
             List<double> functions = new List<double>();
             int counter = 0;
             double lastP = 0;
@@ -36,64 +38,52 @@ namespace NumberMethods
                 values.Add((x, yi));
 
             }
-            while (x < n)
+
+            for (int i = 3; i < n; i++)
             {
-                try
+
+                double fk2 = functions[i - 3];
+                double fk1 = functions[i - 2];
+                double fk = functions[i - 1];
+
+                p = values[i - 3].Item2 + ((4 * h) / 3) * (2 * fk2 - fk1 + 2 * fk);
+                x = Math.Round(x + h, 3);
+
+                if (lastP != 0 && withControlElement)
                 {
+                    m = p + 9 * (yi - lastP) / 121;
 
-                    x = Math.Round(x + h, 3);
-                    double fk2 = functions[counter - 3];
-                    double fk1 = functions[counter - 2];
-                    double fk = functions[counter - 1];
-
-                    p = values[counter - 3].Item2 + ((4 * h) / 3) * (2 * fk2 - fk1 + 2 * fk);
-
-                    if (lastP != 0 && withControlElement)
-                    {
-                        m = p + 9 * (yi - lastP) / 121;
-
-                    }
-                    else
-                    {
-                        m = p;
-                    }
-
-                    f = Equation.CalculateFunction(x, m);
-                    //if (withControlElement)
-                    //{
-                    //    f = Equation.CalculateFunction(x, m);
-                    //}
-                    //else
-                    //{
-                    //    f = Equation.CalculateFunction(x, p);
-                    //}
-
-                    // yi = ((-values[counter - 2].Item2 + 9 * yi) / 8)
-                    //     + ((3 * h) / 8) * (-fk1 + (2 * fk) + f);
-
-                    yi = ((-values[counter - 2].Item2+ 9 * yi ) / 8)
-                         + ((3 * h) / 8) * (f - fk1 + (2 * fk));
-                    if (minError != 0 || stepValue != 0)
-                    {
-                        double error = 0.2 * Math.Abs(values[counter - 1].Item2 - yi);
-                        //double error = 0.31 * Math.Pow(h, 5) * values[counter - 1].Item2;
-                        if (error > minError)
-                        {
-                            h -= stepValue;
-                        }
-                    }
-                    lastP = p;
-
-
-                    counter++;
-                    functions.Add(f);
-                    values.Add((x, yi));
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    m = p;
                 }
+
+                f = Equation.CalculateFunction(x, m);
+
+                yi = ((-values[i - 2].Item2 + 9 * yi) / 8)
+                     + ((3 * h) / 8) * (-fk1 + (2 * fk) + f);
+
+
+                if (minError != 0 || stepValue != 0)
+                {
+                    //double error = 0.2 * Math.Abs(values[counter - 1].Item2 - yi);
+                    double error = Math.Abs(values[i - 1].Item2 - yi) / 29;
+                    //double error = 0.31 * Math.Pow(h, 5) * values[counter - 1].Item2;
+                    if (error > minError)
+                    {
+                        h -= stepValue;
+                    }
+                }
+
+                lastP = p;
+
+
+                counter++;
+                functions.Add(f);
+                values.Add((x, yi));
             }
+
 
             return values;
         }

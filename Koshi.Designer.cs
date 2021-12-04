@@ -45,6 +45,10 @@ namespace NumberMethods
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -72,7 +76,7 @@ namespace NumberMethods
             // 
             this.textBox1.Location = new System.Drawing.Point(69, 112);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(150, 31);
+            this.textBox1.Size = new System.Drawing.Size(195, 31);
             this.textBox1.TabIndex = 2;
             // 
             // label1
@@ -97,7 +101,7 @@ namespace NumberMethods
             // 
             this.textBox2.Location = new System.Drawing.Point(70, 228);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 31);
+            this.textBox2.Size = new System.Drawing.Size(194, 31);
             this.textBox2.TabIndex = 4;
             // 
             // label3
@@ -135,7 +139,7 @@ namespace NumberMethods
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(270, 173);
+            this.label5.Location = new System.Drawing.Point(290, 173);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 25);
             this.label5.TabIndex = 13;
@@ -143,7 +147,7 @@ namespace NumberMethods
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(270, 103);
+            this.textBox5.Location = new System.Drawing.Point(290, 112);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(150, 31);
             this.textBox5.TabIndex = 12;
@@ -151,7 +155,7 @@ namespace NumberMethods
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(269, 57);
+            this.label6.Location = new System.Drawing.Point(290, 57);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(30, 25);
             this.label6.TabIndex = 11;
@@ -159,7 +163,7 @@ namespace NumberMethods
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(270, 228);
+            this.textBox6.Location = new System.Drawing.Point(290, 228);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(150, 31);
             this.textBox6.TabIndex = 10;
@@ -172,7 +176,7 @@ namespace NumberMethods
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(156, 69);
             this.trackBar1.TabIndex = 15;
-            this.trackBar1.Value = 150;
+            this.trackBar1.Value = 120;
             this.trackBar1.ValueChanged += new System.EventHandler(this.button1_Click);
             // 
             // trackBar2
@@ -186,11 +190,54 @@ namespace NumberMethods
             this.trackBar2.Value = 23;
             this.trackBar2.ValueChanged += new System.EventHandler(this.button1_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(597, 39);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(470, 24);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "чорна лінія - графік наближеного розвязку при h ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(597, 75);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(498, 24);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "зелена лінія - графік наближеного розвязку при h/2 ";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(597, 110);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(446, 24);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "синя пунктирна лінія - графік точного розвязку";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 25;
+            this.listBox1.Location = new System.Drawing.Point(290, 292);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(185, 179);
+            this.listBox1.TabIndex = 20;
+            // 
             // Koshi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1909, 1163);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.label5);
@@ -235,5 +282,9 @@ namespace NumberMethods
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

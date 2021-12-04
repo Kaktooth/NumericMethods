@@ -45,5 +45,11 @@ namespace NumberMethods
             Koshi koshi = new Koshi();
             koshi.Show();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MultiStepKoshi multiStepKoshi = new MultiStepKoshi();
+            multiStepKoshi.Show();
+        }
     }
 }

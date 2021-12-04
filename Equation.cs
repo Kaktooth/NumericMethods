@@ -40,8 +40,7 @@ namespace NumberMethods
         {
             if (x != 0 && y != 0)
             {
-                Math.Round(x, 4);
-                Math.Round(y, 4);
+
                 var replacedExpression = expression
                     .Replace("x", x.ToString().Replace(',', '.'))
                     .Replace("y", y.ToString().Replace(',', '.'))

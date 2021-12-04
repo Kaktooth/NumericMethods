@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace NumberMethods
 {
-    public partial class Koshi : Form
+    public partial class MultiStepKoshi : Form
     {
-        public Koshi()
+        public MultiStepKoshi()
         {
             InitializeComponent();
         }
@@ -21,9 +20,18 @@ namespace NumberMethods
             double a = Convert.ToDouble(textBox3.Text.Split(',')[0]);
             double b = Convert.ToDouble(textBox3.Text.Split(',')[1]);
             double h = Convert.ToDouble(textBox4.Text);
+            double n = Math.Abs(b - a) / h;
             double x0 = Convert.ToDouble(textBox5.Text);
             double y0 = Convert.ToDouble(textBox6.Text);
-            Equation equation2 = new Equation(accurateExpression);
+            double minerror = 0;
+            double stepValue = 0;
+            if (textBox7.Text != "" || textBox8.Text != "")
+            {
+                minerror = Convert.ToDouble(textBox7.Text);
+                stepValue = Convert.ToDouble(textBox8.Text);
+            }
+
+            Equation equation = new Equation(accurateExpression);
             using (Graphics g = Graphics.FromImage(pictureBox1.Image))
             {
                 Pen pen4 = new Pen(Color.Blue, 1);
@@ -51,40 +59,23 @@ namespace NumberMethods
                     }
                 }
             }
-            Equation equation = new Equation(expression);
-            List<(double, double, double)> values = new List<(double, double, double)>();
+            Equation equation2 = new Equation(expression);
+            listBox1.Items.Add("n: " + n);
+            //var step = Heming.CalculateStep(x0, y0);
+            // step = Heming.CalculateStep(1, 1);
+            var values = Heming.CalculateHeming(minerror, stepValue, x0, y0, h, n, a, b, true);
+            DrawPlot(values, new Pen(Color.Black, 2), Brushes.Red);
 
-            var thread = new Thread(
-                () =>
-                {
-                    EulerMethod.CalculateEuler(x0, y0, h, a, b, values);
-
-                });
-            thread.Start();
-            thread.Join();
-
-            DrawPlot(values, new Pen(Color.Black, 3), Brushes.Blue);
-            //double error = 0;
-            //double maxError = 0;
-            //for (int i = 1; i < 10; i++)
-            //{
-            //    error = Math.Abs((values[i].Item3 - values[i].Item2) / (Math.Pow(2, 1) - 1));
-            //    maxError = Math.Max(maxError, error);
-            //}
-
-            //listBox1.Items.Add("Max error: " + maxError);
-
-            pictureBox1.Refresh();
+            values = Heming.CalculateHeming(minerror, stepValue, x0, y0, h, n, a, b, false);
+            DrawPlot(values, new Pen(Color.Green, 2), Brushes.Red);
         }
-
-        public void DrawPlot(List<(double, double, double)> values, Pen graphicPen, Brush dotsBrush)
+        public void DrawPlot(List<(double, double)> values, Pen graphicPen, Brush dotsBrush)
         {
 
             using (Graphics g = Graphics.FromImage(pictureBox1.Image))
             {
                 Pen pen4 = new Pen(Color.Blue, 1);
                 List<PointF> pointslist = new List<PointF>();
-                List<PointF> pointslist2 = new List<PointF>();
                 for (int i = 0; i < trackBar1.Value * 5; i++)
                 {
                     if (i % 3 == 0)
@@ -96,25 +87,22 @@ namespace NumberMethods
                 for (int i = 0; i < values.Count; i++)
                 {
                     double x = values[i].Item1;
-                    double yi2 = values[i].Item2;
-                    double y = values[i].Item3;
+                    double y = values[i].Item2;
+
 
                     //pointslist.Add(new PointF((float)x/2 * trackBar1.Value, -(float)yi2 * trackBar2.Value + (pictureBox1.Height / 2)));
                     pointslist.Add(new PointF((float)x * trackBar1.Value,
                         -(float)y * trackBar2.Value + (pictureBox1.Height / 2)));
-                    pointslist2.Add(new PointF((float)x * trackBar1.Value,
-                        -(float)yi2 * trackBar2.Value + (pictureBox1.Height / 2)));
 
                 }
                 pointslist.Reverse();
                 g.DrawLines(graphicPen, pointslist.ToArray());
-                pointslist2.Reverse();
-                g.DrawLines(new Pen(Color.Green, 3), pointslist2.ToArray());
+
                 for (int i = 0; i < values.Count; i++)
                 {
                     double x = values[i].Item1;
-                    double yi2 = values[i].Item2;
-                    double y = values[i].Item3;
+                    double y = values[i].Item2;
+
                     if (x % 1 == 0)
                     {
                         PointF p = new PointF((float)x * trackBar1.Value, -(float)y * trackBar2.Value + (pictureBox1.Height / 2));
@@ -132,6 +120,11 @@ namespace NumberMethods
 
                 pictureBox1.Refresh();
             }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

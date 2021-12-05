@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace NumberMethods
 {
@@ -16,7 +15,7 @@ namespace NumberMethods
         }
         public static List<(double, double)> CalculateHeming(double minError, double stepValue, double x, double y, double h, double n, double a, double b, bool withControlElement)
         {
-            
+
             List<(double, double)> values = new List<(double, double)>();
             values.Add((x, y));
             List<double> functions = new List<double>();
@@ -26,6 +25,7 @@ namespace NumberMethods
             double m = 0;
             double yi = y;
             double f = 0;
+            double maxError = 0;
             for (int i = 0; i < 3; i++)
             {
                 x = Math.Round(x + h, 3);
@@ -64,12 +64,11 @@ namespace NumberMethods
                 yi = ((-values[i - 2].Item2 + 9 * yi) / 8)
                      + ((3 * h) / 8) * (-fk1 + (2 * fk) + f);
 
+                double error = Math.Abs(values[i - 1].Item2 - yi) / 29;
+                maxError = Math.Max(maxError, error);
 
                 if (minError != 0 || stepValue != 0)
                 {
-                    //double error = 0.2 * Math.Abs(values[counter - 1].Item2 - yi);
-                    double error = Math.Abs(values[i - 1].Item2 - yi) / 29;
-                    //double error = 0.31 * Math.Pow(h, 5) * values[counter - 1].Item2;
                     if (error > minError)
                     {
                         h -= stepValue;
@@ -77,7 +76,6 @@ namespace NumberMethods
                 }
 
                 lastP = p;
-
 
                 counter++;
                 functions.Add(f);
